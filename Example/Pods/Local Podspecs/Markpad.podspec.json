@@ -1,0 +1,22 @@
+{
+  "name": "Markpad",
+  "version": "0.1.0",
+  "summary": "A short description of Markpad.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/svyatoslav-zubrin/Markpad",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "svyatoslav-zubrin": "szubrin79@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/svyatoslav-zubrin/Markpad.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "Markpad/Classes/**/*"
+}

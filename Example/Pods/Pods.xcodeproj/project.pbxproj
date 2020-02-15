@@ -1,0 +1,867 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		191225CBC2D648CAEDC3C2453AC29795 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		2B1A9D1711EF3B3CCB8AF4ED2FEDEBAC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		31A2CF52D052882CBDF56F8F66AE1A0C /* Markpad-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 301B3E794FD550CCD8E0D7E711D1BC55 /* Markpad-dummy.m */; };
+		33FB1ED2B3CA097C9DA874B2A97D0204 /* Pods-Markpad_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D8CE450DF225E54F9D6E320C8458CE /* Pods-Markpad_Tests-dummy.m */; };
+		583CA8D7EADBF5C3A21E91AC8214F107 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		70303E6D6A74BE7A760B770154F392CE /* Pods-Markpad_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2970F5AA9CB8E3E0292106DEDC3E298F /* Pods-Markpad_Example-dummy.m */; };
+		8D23775423F7DD6600C71943 /* MPTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23775323F7DD6600C71943 /* MPTextView.swift */; };
+		8D23775623F7DDCB00C71943 /* MPTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23775523F7DDCB00C71943 /* MPTextStorage.swift */; };
+		8D23775823F7DE1400C71943 /* MPTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23775723F7DE1400C71943 /* MPTheme.swift */; };
+		8D23775A23F7DECA00C71943 /* MPUniversalTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23775923F7DECA00C71943 /* MPUniversalTypes.swift */; };
+		8D23775C23F7DF2600C71943 /* MPStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23775B23F7DF2600C71943 /* MPStyle.swift */; };
+		8D23775E23F7DF6600C71943 /* MPElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23775D23F7DF6600C71943 /* MPElement.swift */; };
+		8D23776023F7DFE300C71943 /* MPExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23775F23F7DFE300C71943 /* MPExtenstions.swift */; };
+		8D23776E23F7E15C00C71943 /* MPMarkpadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D23776D23F7E15C00C71943 /* MPMarkpadView.swift */; };
+		8D23777323F7FD9D00C71943 /* MPMarkpadView.xib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D23777023F7F5AD00C71943 /* MPMarkpadView.xib */; };
+		9683B2FAE760AE87DACE5C99317BCB95 /* Pods-Markpad_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 129B77EE2C5400A663D718DB3052F6D7 /* Pods-Markpad_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C2BD3105061045462D5C0C6B3EE00815 /* Markpad-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DFC5A351DDE51D69273AFEEDA2DDFE31 /* Markpad-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB637C0F741218FA5A087FF7887E9288 /* Pods-Markpad_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 705CF5F411A8ED486C00E6196298A51B /* Pods-Markpad_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4A2AD2CA4508FA623CE21EF19B57F0C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1E3DE3C84D55776204D88EA9EC4EA15;
+			remoteInfo = "Pods-Markpad_Example";
+		};
+		AC6204FD87A1EB9346F6EBB11F3C1B44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B7D2098FB459C1A431752752F34931B;
+			remoteInfo = Markpad;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8D23777223F7FD8F00C71943 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				8D23777323F7FD9D00C71943 /* MPMarkpadView.xib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		038D135ED33400584872F8FCE958C0CD /* Markpad.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Markpad.modulemap; sourceTree = "<group>"; };
+		0B0A4020A530E76165210E48BE9A400D /* Pods-Markpad_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Markpad_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		129B77EE2C5400A663D718DB3052F6D7 /* Pods-Markpad_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Markpad_Example-umbrella.h"; sourceTree = "<group>"; };
+		1491015AC312AEA26DA00D347D3C149C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C7CFD61F7EAB88B1A2A08172224EC5A /* Pods-Markpad_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Markpad_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		248D57C5C80C3EE91D884948AB43438F /* Pods-Markpad_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Markpad_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		285D9302D247813541055CF7A08AB8C2 /* Pods-Markpad_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Markpad_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		2970F5AA9CB8E3E0292106DEDC3E298F /* Pods-Markpad_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Markpad_Example-dummy.m"; sourceTree = "<group>"; };
+		301B3E794FD550CCD8E0D7E711D1BC55 /* Markpad-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Markpad-dummy.m"; sourceTree = "<group>"; };
+		31ED192A1884D384032A7D03CEEDEF1F /* Pods-Markpad_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Markpad_Example-frameworks.sh"; sourceTree = "<group>"; };
+		4927AFE08BCE7A3FF030C38E16AD786A /* Pods_Markpad_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Markpad_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		590DC8BBBA94FA9F994F51C9005DBD3B /* Pods-Markpad_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Markpad_Example.modulemap"; sourceTree = "<group>"; };
+		59CC623ABDDA68988089250A8FB0E3B3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		5A5C4964495FF57BD6E5AECC99E160A1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C3910981D15FF0B1AE95FCDD7E0ECB2 /* Markpad.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Markpad.xcconfig; sourceTree = "<group>"; };
+		705CF5F411A8ED486C00E6196298A51B /* Pods-Markpad_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Markpad_Tests-umbrella.h"; sourceTree = "<group>"; };
+		816EB67A4447784F58A275E6231D4CA8 /* Pods-Markpad_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Markpad_Tests.modulemap"; sourceTree = "<group>"; };
+		837FA968E4C06B8B7AF618E20BB49456 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8A78173BA0A8CE23302F109D2C54DFC4 /* Pods-Markpad_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Markpad_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		8D23774D23F7DB5D00C71943 /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
+		8D23775023F7DBDA00C71943 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		8D23775323F7DD6600C71943 /* MPTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTextView.swift; sourceTree = "<group>"; };
+		8D23775523F7DDCB00C71943 /* MPTextStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTextStorage.swift; sourceTree = "<group>"; };
+		8D23775723F7DE1400C71943 /* MPTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTheme.swift; sourceTree = "<group>"; };
+		8D23775923F7DECA00C71943 /* MPUniversalTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUniversalTypes.swift; sourceTree = "<group>"; };
+		8D23775B23F7DF2600C71943 /* MPStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStyle.swift; sourceTree = "<group>"; };
+		8D23775D23F7DF6600C71943 /* MPElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPElement.swift; sourceTree = "<group>"; };
+		8D23775F23F7DFE300C71943 /* MPExtenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPExtenstions.swift; sourceTree = "<group>"; };
+		8D23776223F7E0CE00C71943 /* solarized-light.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "solarized-light.json"; sourceTree = "<group>"; };
+		8D23776323F7E0CE00C71943 /* one-light.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "one-light.json"; sourceTree = "<group>"; };
+		8D23776423F7E0CE00C71943 /* one-light-custom.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "one-light-custom.json"; sourceTree = "<group>"; };
+		8D23776523F7E0CE00C71943 /* base16-tomorrow-dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "base16-tomorrow-dark.json"; sourceTree = "<group>"; };
+		8D23776623F7E0CE00C71943 /* base16-tomorrow-light.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "base16-tomorrow-light.json"; sourceTree = "<group>"; };
+		8D23776723F7E0CE00C71943 /* system-minimal.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "system-minimal.json"; sourceTree = "<group>"; };
+		8D23776823F7E0CE00C71943 /* blues-clues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "blues-clues.json"; sourceTree = "<group>"; };
+		8D23776923F7E0CE00C71943 /* solarized-dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "solarized-dark.json"; sourceTree = "<group>"; };
+		8D23776A23F7E0CE00C71943 /* one-dark-custom.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "one-dark-custom.json"; sourceTree = "<group>"; };
+		8D23776B23F7E0CE00C71943 /* one-dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "one-dark.json"; sourceTree = "<group>"; };
+		8D23776D23F7E15C00C71943 /* MPMarkpadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMarkpadView.swift; sourceTree = "<group>"; };
+		8D23777023F7F5AD00C71943 /* MPMarkpadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPMarkpadView.xib; sourceTree = "<group>"; };
+		8E08968ED39736C7FE804E9C28F4E609 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A6E600DBCFBD15B7B7F22064810EE3AC /* Markpad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Markpad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4D8CE450DF225E54F9D6E320C8458CE /* Pods-Markpad_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Markpad_Tests-dummy.m"; sourceTree = "<group>"; };
+		B6FFF10914B771643BD649FBB229A199 /* Pods-Markpad_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Markpad_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		BC069F4E5CFB120EAE502F0B1A72CDD9 /* Markpad.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = Markpad.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C54916D7CB4B9D21EC2398153FD35F17 /* Pods-Markpad_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Markpad_Tests-resources.sh"; sourceTree = "<group>"; };
+		CAD670CE1573AC67EA41E3EB8027118A /* Pods-Markpad_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Markpad_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		CB2DBB29E1FC530378779F730ED13117 /* Pods-Markpad_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Markpad_Example.release.xcconfig"; sourceTree = "<group>"; };
+		DFC5A351DDE51D69273AFEEDA2DDFE31 /* Markpad-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Markpad-umbrella.h"; sourceTree = "<group>"; };
+		E49F26C2834CE0FB8E407F0B21ACE397 /* Pods_Markpad_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Markpad_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F44FFF98A62C4DE303DBBD93E877BF /* Pods-Markpad_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Markpad_Example-resources.sh"; sourceTree = "<group>"; };
+		EE1A3102465CF778DD459AB730795AB1 /* Pods-Markpad_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Markpad_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		FF0D8D9CD157560012FE9410D55AFBCE /* Markpad-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Markpad-prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		25D1444D1CF5BA28D4340BEE46ABA3EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				191225CBC2D648CAEDC3C2453AC29795 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EF45DA69427ED0FA4C32276D25947AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				583CA8D7EADBF5C3A21E91AC8214F107 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFDDA15279BE9B2B24CD69332F77E16D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B1A9D1711EF3B3CCB8AF4ED2FEDEBAC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		044104A6E646627FD627722960D9A669 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				74A7E9A63E44A8017D15685FA0F2F108 /* Markpad */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		25C99756271B9DD267993CF089407A5D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E625B661A90F1314928E72319A014EC0 /* Pods-Markpad_Example */,
+				64E8135F8A6DC88AD566B3C30D928365 /* Pods-Markpad_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		5E0D919E635D23B70123790B8308F8EF /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		64068DC7396DE575C9AA60F40D08B24E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				5A5C4964495FF57BD6E5AECC99E160A1 /* Info.plist */,
+				038D135ED33400584872F8FCE958C0CD /* Markpad.modulemap */,
+				5C3910981D15FF0B1AE95FCDD7E0ECB2 /* Markpad.xcconfig */,
+				301B3E794FD550CCD8E0D7E711D1BC55 /* Markpad-dummy.m */,
+				FF0D8D9CD157560012FE9410D55AFBCE /* Markpad-prefix.pch */,
+				DFC5A351DDE51D69273AFEEDA2DDFE31 /* Markpad-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/Markpad";
+			sourceTree = "<group>";
+		};
+		64E8135F8A6DC88AD566B3C30D928365 /* Pods-Markpad_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8E08968ED39736C7FE804E9C28F4E609 /* Info.plist */,
+				816EB67A4447784F58A275E6231D4CA8 /* Pods-Markpad_Tests.modulemap */,
+				1C7CFD61F7EAB88B1A2A08172224EC5A /* Pods-Markpad_Tests-acknowledgements.markdown */,
+				EE1A3102465CF778DD459AB730795AB1 /* Pods-Markpad_Tests-acknowledgements.plist */,
+				B4D8CE450DF225E54F9D6E320C8458CE /* Pods-Markpad_Tests-dummy.m */,
+				285D9302D247813541055CF7A08AB8C2 /* Pods-Markpad_Tests-frameworks.sh */,
+				C54916D7CB4B9D21EC2398153FD35F17 /* Pods-Markpad_Tests-resources.sh */,
+				705CF5F411A8ED486C00E6196298A51B /* Pods-Markpad_Tests-umbrella.h */,
+				B6FFF10914B771643BD649FBB229A199 /* Pods-Markpad_Tests.debug.xcconfig */,
+				248D57C5C80C3EE91D884948AB43438F /* Pods-Markpad_Tests.release.xcconfig */,
+			);
+			name = "Pods-Markpad_Tests";
+			path = "Target Support Files/Pods-Markpad_Tests";
+			sourceTree = "<group>";
+		};
+		74A7E9A63E44A8017D15685FA0F2F108 /* Markpad */ = {
+			isa = PBXGroup;
+			children = (
+				8D23774F23F7DBC200C71943 /* Resources */,
+				8D23774E23F7DBBA00C71943 /* Classes */,
+				C8CE125FD66A04558AD524E37BE76554 /* Pod */,
+				64068DC7396DE575C9AA60F40D08B24E /* Support Files */,
+			);
+			name = Markpad;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				044104A6E646627FD627722960D9A669 /* Development Pods */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				B68DA2BB51FBEF9B2DF37271BAA081E3 /* Products */,
+				25C99756271B9DD267993CF089407A5D /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8D23774E23F7DBBA00C71943 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8D23775923F7DECA00C71943 /* MPUniversalTypes.swift */,
+				8D23775F23F7DFE300C71943 /* MPExtenstions.swift */,
+				8D23775223F7DCF300C71943 /* TextView */,
+				8D23776C23F7E12200C71943 /* Markpad */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		8D23774F23F7DBC200C71943 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D23775023F7DBDA00C71943 /* Icons.xcassets */,
+				8D23776123F7E0CE00C71943 /* themes */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8D23775223F7DCF300C71943 /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				8D23775323F7DD6600C71943 /* MPTextView.swift */,
+				8D23775523F7DDCB00C71943 /* MPTextStorage.swift */,
+				8D23775723F7DE1400C71943 /* MPTheme.swift */,
+				8D23775B23F7DF2600C71943 /* MPStyle.swift */,
+				8D23775D23F7DF6600C71943 /* MPElement.swift */,
+			);
+			path = TextView;
+			sourceTree = "<group>";
+		};
+		8D23776123F7E0CE00C71943 /* themes */ = {
+			isa = PBXGroup;
+			children = (
+				8D23776223F7E0CE00C71943 /* solarized-light.json */,
+				8D23776323F7E0CE00C71943 /* one-light.json */,
+				8D23776423F7E0CE00C71943 /* one-light-custom.json */,
+				8D23776523F7E0CE00C71943 /* base16-tomorrow-dark.json */,
+				8D23776623F7E0CE00C71943 /* base16-tomorrow-light.json */,
+				8D23776723F7E0CE00C71943 /* system-minimal.json */,
+				8D23776823F7E0CE00C71943 /* blues-clues.json */,
+				8D23776923F7E0CE00C71943 /* solarized-dark.json */,
+				8D23776A23F7E0CE00C71943 /* one-dark-custom.json */,
+				8D23776B23F7E0CE00C71943 /* one-dark.json */,
+			);
+			path = themes;
+			sourceTree = "<group>";
+		};
+		8D23776C23F7E12200C71943 /* Markpad */ = {
+			isa = PBXGroup;
+			children = (
+				8D23776D23F7E15C00C71943 /* MPMarkpadView.swift */,
+				8D23777023F7F5AD00C71943 /* MPMarkpadView.xib */,
+			);
+			path = Markpad;
+			sourceTree = "<group>";
+		};
+		B68DA2BB51FBEF9B2DF37271BAA081E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A6E600DBCFBD15B7B7F22064810EE3AC /* Markpad.framework */,
+				E49F26C2834CE0FB8E407F0B21ACE397 /* Pods_Markpad_Example.framework */,
+				4927AFE08BCE7A3FF030C38E16AD786A /* Pods_Markpad_Tests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E0D919E635D23B70123790B8308F8EF /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C8CE125FD66A04558AD524E37BE76554 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				59CC623ABDDA68988089250A8FB0E3B3 /* LICENSE */,
+				BC069F4E5CFB120EAE502F0B1A72CDD9 /* Markpad.podspec */,
+				837FA968E4C06B8B7AF618E20BB49456 /* README.md */,
+				8D23774D23F7DB5D00C71943 /* Notes.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		E625B661A90F1314928E72319A014EC0 /* Pods-Markpad_Example */ = {
+			isa = PBXGroup;
+			children = (
+				1491015AC312AEA26DA00D347D3C149C /* Info.plist */,
+				590DC8BBBA94FA9F994F51C9005DBD3B /* Pods-Markpad_Example.modulemap */,
+				0B0A4020A530E76165210E48BE9A400D /* Pods-Markpad_Example-acknowledgements.markdown */,
+				CAD670CE1573AC67EA41E3EB8027118A /* Pods-Markpad_Example-acknowledgements.plist */,
+				2970F5AA9CB8E3E0292106DEDC3E298F /* Pods-Markpad_Example-dummy.m */,
+				31ED192A1884D384032A7D03CEEDEF1F /* Pods-Markpad_Example-frameworks.sh */,
+				E7F44FFF98A62C4DE303DBBD93E877BF /* Pods-Markpad_Example-resources.sh */,
+				129B77EE2C5400A663D718DB3052F6D7 /* Pods-Markpad_Example-umbrella.h */,
+				8A78173BA0A8CE23302F109D2C54DFC4 /* Pods-Markpad_Example.debug.xcconfig */,
+				CB2DBB29E1FC530378779F730ED13117 /* Pods-Markpad_Example.release.xcconfig */,
+			);
+			name = "Pods-Markpad_Example";
+			path = "Target Support Files/Pods-Markpad_Example";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3A713FAE58446F08E0A050E1FA5E0BFC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB637C0F741218FA5A087FF7887E9288 /* Pods-Markpad_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D882BBFDE30E8FA900727AFD4326C9F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2BD3105061045462D5C0C6B3EE00815 /* Markpad-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70B3636966A6186C7CCE9C8735E15EC4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9683B2FAE760AE87DACE5C99317BCB95 /* Pods-Markpad_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		908B082FEB8BA29F9116D616FBEAEB6E /* Pods-Markpad_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50E4E4F46E0EBBD30E448B03E4D5CCB4 /* Build configuration list for PBXNativeTarget "Pods-Markpad_Tests" */;
+			buildPhases = (
+				02F607DBD96718B1D0A446B454F4ECC6 /* Sources */,
+				DFDDA15279BE9B2B24CD69332F77E16D /* Frameworks */,
+				3A713FAE58446F08E0A050E1FA5E0BFC /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				25DD6CC776DBA107DB9BF0F1EBAB54B9 /* PBXTargetDependency */,
+			);
+			name = "Pods-Markpad_Tests";
+			productName = "Pods-Markpad_Tests";
+			productReference = 4927AFE08BCE7A3FF030C38E16AD786A /* Pods_Markpad_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9B7D2098FB459C1A431752752F34931B /* Markpad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEEBEDC5E15EAB5C23EAC627D070EA5D /* Build configuration list for PBXNativeTarget "Markpad" */;
+			buildPhases = (
+				715CAC438EA7054A513B7417CD9EC914 /* Sources */,
+				2EF45DA69427ED0FA4C32276D25947AA /* Frameworks */,
+				4D882BBFDE30E8FA900727AFD4326C9F /* Headers */,
+				8D23777223F7FD8F00C71943 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Markpad;
+			productName = Markpad;
+			productReference = A6E600DBCFBD15B7B7F22064810EE3AC /* Markpad.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F1E3DE3C84D55776204D88EA9EC4EA15 /* Pods-Markpad_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB08004214A8A82B2FE2EC7650B38D2D /* Build configuration list for PBXNativeTarget "Pods-Markpad_Example" */;
+			buildPhases = (
+				F6E524AFA2AA4C9C9BD2C1DA90799157 /* Sources */,
+				25D1444D1CF5BA28D4340BEE46ABA3EB /* Frameworks */,
+				70B3636966A6186C7CCE9C8735E15EC4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A357F703EE4C38B98F2F985667710D05 /* PBXTargetDependency */,
+			);
+			name = "Pods-Markpad_Example";
+			productName = "Pods-Markpad_Example";
+			productReference = E49F26C2834CE0FB8E407F0B21ACE397 /* Pods_Markpad_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+				TargetAttributes = {
+					9B7D2098FB459C1A431752752F34931B = {
+						LastSwiftMigration = 1120;
+					};
+				};
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = B68DA2BB51FBEF9B2DF37271BAA081E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9B7D2098FB459C1A431752752F34931B /* Markpad */,
+				F1E3DE3C84D55776204D88EA9EC4EA15 /* Pods-Markpad_Example */,
+				908B082FEB8BA29F9116D616FBEAEB6E /* Pods-Markpad_Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		02F607DBD96718B1D0A446B454F4ECC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33FB1ED2B3CA097C9DA874B2A97D0204 /* Pods-Markpad_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		715CAC438EA7054A513B7417CD9EC914 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D23775E23F7DF6600C71943 /* MPElement.swift in Sources */,
+				8D23775C23F7DF2600C71943 /* MPStyle.swift in Sources */,
+				8D23776E23F7E15C00C71943 /* MPMarkpadView.swift in Sources */,
+				8D23775823F7DE1400C71943 /* MPTheme.swift in Sources */,
+				8D23775423F7DD6600C71943 /* MPTextView.swift in Sources */,
+				31A2CF52D052882CBDF56F8F66AE1A0C /* Markpad-dummy.m in Sources */,
+				8D23775623F7DDCB00C71943 /* MPTextStorage.swift in Sources */,
+				8D23775A23F7DECA00C71943 /* MPUniversalTypes.swift in Sources */,
+				8D23776023F7DFE300C71943 /* MPExtenstions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6E524AFA2AA4C9C9BD2C1DA90799157 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70303E6D6A74BE7A760B770154F392CE /* Pods-Markpad_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		25DD6CC776DBA107DB9BF0F1EBAB54B9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Markpad_Example";
+			target = F1E3DE3C84D55776204D88EA9EC4EA15 /* Pods-Markpad_Example */;
+			targetProxy = 4A2AD2CA4508FA623CE21EF19B57F0C7 /* PBXContainerItemProxy */;
+		};
+		A357F703EE4C38B98F2F985667710D05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Markpad;
+			target = 9B7D2098FB459C1A431752752F34931B /* Markpad */;
+			targetProxy = AC6204FD87A1EB9346F6EBB11F3C1B44 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		42D99CD6ADF101F2214DE26D6B0B52E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6FFF10914B771643BD649FBB229A199 /* Pods-Markpad_Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Markpad_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Markpad_Tests/Pods-Markpad_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		586E0CAB1EC60D848C9335D7BCEC423A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB2DBB29E1FC530378779F730ED13117 /* Pods-Markpad_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Markpad_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Markpad_Example/Pods-Markpad_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8B33C5230DE4A9DFA6D8F46505DD7AF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		A168081F09085C2907A3306679DB9D9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A78173BA0A8CE23302F109D2C54DFC4 /* Pods-Markpad_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Markpad_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Markpad_Example/Pods-Markpad_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B42B54097A876E8A982CBF5DAA91B1AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		C1225606DAC36EAE55AD02199B3C0E22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 248D57C5C80C3EE91D884948AB43438F /* Pods-Markpad_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Markpad_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Markpad_Tests/Pods-Markpad_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D6F5C9922115EE847C2154BD2B5991FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C3910981D15FF0B1AE95FCDD7E0ECB2 /* Markpad.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Markpad/Markpad-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Markpad/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Markpad/Markpad.modulemap";
+				PRODUCT_MODULE_NAME = Markpad;
+				PRODUCT_NAME = Markpad;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E2771B5C51B27F69C5980FB2FE4EDBB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C3910981D15FF0B1AE95FCDD7E0ECB2 /* Markpad.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Markpad/Markpad-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Markpad/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Markpad/Markpad.modulemap";
+				PRODUCT_MODULE_NAME = Markpad;
+				PRODUCT_NAME = Markpad;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B33C5230DE4A9DFA6D8F46505DD7AF7 /* Debug */,
+				B42B54097A876E8A982CBF5DAA91B1AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50E4E4F46E0EBBD30E448B03E4D5CCB4 /* Build configuration list for PBXNativeTarget "Pods-Markpad_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42D99CD6ADF101F2214DE26D6B0B52E3 /* Debug */,
+				C1225606DAC36EAE55AD02199B3C0E22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEEBEDC5E15EAB5C23EAC627D070EA5D /* Build configuration list for PBXNativeTarget "Markpad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2771B5C51B27F69C5980FB2FE4EDBB7 /* Debug */,
+				D6F5C9922115EE847C2154BD2B5991FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB08004214A8A82B2FE2EC7650B38D2D /* Build configuration list for PBXNativeTarget "Pods-Markpad_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A168081F09085C2907A3306679DB9D9A /* Debug */,
+				586E0CAB1EC60D848C9335D7BCEC423A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

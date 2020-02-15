@@ -1,0 +1,16 @@
+PODS:
+  - Markpad (0.1.0)
+
+DEPENDENCIES:
+  - Markpad (from `../`)
+
+EXTERNAL SOURCES:
+  Markpad:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Markpad: 4d881ab59c17930dd747ce9c795166ba11b296cb
+
+PODFILE CHECKSUM: 98c7cd6d532b0dde8a695c439d89a06bbc4c1eb4
+
+COCOAPODS: 1.5.3

@@ -1,0 +1,6 @@
+framework module Markpad {
+  umbrella header "Markpad-umbrella.h"
+
+  export *
+  module * { export * }
+}
