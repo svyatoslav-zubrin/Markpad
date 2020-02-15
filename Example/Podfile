@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Markpad_Example' do
+  pod 'Markpad', :path => '../'
+
+  target 'Markpad_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
