@@ -14,26 +14,17 @@ class MPRichTextEditorView: UIView {
 
     private lazy var toolbarContainer: UIView = {
         let v = UIView()
-        v.layer.borderWidth = 1
-        v.layer.cornerRadius = 4
+        v.layer.borderWidth = Constants.Layout.borderWidth
+        v.layer.cornerRadius = Constants.Layout.cornerRadius
         v.layer.borderColor = UIColor.gray.cgColor
-
-        let sv = self.toolbarStackView
-        v.addSubview(sv)
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.snp.makeConstraints { (make) in
-            make.top.leading.equalToSuperview().offset(8)
-            make.bottom.trailing.equalToSuperview().offset(-8)
-        }
         return v
     }()
 
     private lazy var toolbarStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [self.boldButton, self.italicButton])
+        let sv = UIStackView()
         sv.axis = .horizontal
         sv.alignment = .leading
         sv.distribution = .fill
-        sv.spacing = 4
         return sv
     }()
 
@@ -44,10 +35,6 @@ class MPRichTextEditorView: UIView {
         let button = UIButton(frame: .zero)
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(boldTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.snp.makeConstraints { (make) in
-            make.width.height.equalTo(image.size.height)
-        }
         return button
     }()
 
@@ -58,25 +45,14 @@ class MPRichTextEditorView: UIView {
         let button = UIButton(frame: .zero)
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(italicTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.snp.makeConstraints { (make) in
-            make.width.height.equalTo(image.size.height)
-        }
         return button
     }()
 
     private lazy var textViewContainer: UIView = {
         let v = UIView()
-        v.layer.borderWidth = 1
-        v.layer.cornerRadius = 4
+        v.layer.borderWidth = Constants.Layout.borderWidth
+        v.layer.cornerRadius = Constants.Layout.cornerRadius
         v.layer.borderColor = UIColor.gray.cgColor
-
-        v.addSubview(self.textView)
-        self.textView.translatesAutoresizingMaskIntoConstraints = false
-        self.textView.snp.makeConstraints { (make) in
-            make.top.leading.equalToSuperview().offset(8)
-            make.bottom.trailing.equalToSuperview().offset(-8)
-        }
         return v
     }()
 
@@ -96,7 +72,47 @@ class MPRichTextEditorView: UIView {
         construct()
     }
 
+    private struct Constants {
+        struct Layout {
+            static let borderWidth: CGFloat = 1
+            static let cornerRadius: CGFloat = 8
+            static let buttonHeight: CGFloat = 24
+            static let toolbarSpacingX: CGFloat = 4
+            static let toolbarMargins: CGFloat = 8
+            static let textviewMargins: CGFloat = 8
+        }
+    }
+
     private func construct() {
+        // buttons
+        let buttons = [boldButton, italicButton]
+        for button in buttons {
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.snp.makeConstraints { (make) in
+                make.width.height.equalTo(Constants.Layout.buttonHeight)
+            }
+            toolbarStackView.addArrangedSubview(button)
+        }
+
+        // toolbar
+        toolbarContainer.addSubview(toolbarStackView)
+        toolbarStackView.translatesAutoresizingMaskIntoConstraints = false
+        toolbarStackView.snp.makeConstraints { (make) in
+            make.top.leading.equalToSuperview().offset(Constants.Layout.toolbarMargins)
+            make.bottom.trailing.equalToSuperview().offset(-Constants.Layout.toolbarMargins)
+        }
+
+        toolbarStackView.spacing = Constants.Layout.toolbarSpacingX
+
+        // text view
+        textViewContainer.addSubview(textView)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.snp.makeConstraints { (make) in
+            make.top.leading.equalToSuperview().offset(Constants.Layout.textviewMargins)
+            make.bottom.trailing.equalToSuperview().offset(-Constants.Layout.textviewMargins)
+        }
+
+        // top
         addSubview(toolbarContainer)
         addSubview(textViewContainer)
 
