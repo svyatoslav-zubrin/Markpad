@@ -7,6 +7,28 @@
 
 import UIKit
 
+public enum Style {
+    case bold, italic, underline, link, bulletList, numberedList
+
+    internal var icon: UIImage {
+        let iconName: String
+        switch self {
+        case .bold: iconName = "icon_bold"
+        case .italic: iconName = "icon_italic"
+        case .underline: iconName = "icon_underline"
+        case .link: iconName = "icon_link"
+        case .bulletList: iconName = "icon_bullet_list"
+        case .numberedList: iconName = "icon_numbered_list"
+        }
+        let bundle = Bundle(for: MPRichTextEditorView.self)
+        return UIImage(named: iconName, in: bundle, compatibleWith: nil)!
+    }
+}
+
+protocol Stylable {
+    func markSelection(withSyle style: Style)
+}
+
 class MPTextView: UITextView {
 
     var storage: MPTextStorage = MPTextStorage()
@@ -55,5 +77,13 @@ class MPTextView: UITextView {
         layoutManager.addTextContainer(container)
         storage.addLayoutManager(layoutManager)
     }
+}
 
+// MARK: - Stylable
+
+extension MPTextView: Stylable {
+
+    func markSelection(withSyle style: Style) {
+        print("Will mark selection with style: \(style)")
+    }
 }

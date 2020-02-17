@@ -40,7 +40,7 @@ public class MPRichTextEditorView: UIView {
         return v
     }()
 
-    private let textView = UITextView()
+    private let textView = MPTextView()
 
     // MARK: - Lifecycle
 
@@ -61,25 +61,7 @@ public class MPRichTextEditorView: UIView {
 
     public enum ToolbarItem: Equatable {
 
-        public enum ButtonType {
-            case bold, italic, underline, link, bulletList, numberedList
-
-            var icon: UIImage {
-                let iconName: String
-                switch self {
-                case .bold: iconName = "icon_bold"
-                case .italic: iconName = "icon_italic"
-                case .underline: iconName = "icon_underline"
-                case .link: iconName = "icon_link"
-                case .bulletList: iconName = "icon_bullet_list"
-                case .numberedList: iconName = "icon_numbered_list"
-                }
-                let bundle = Bundle(for: MPRichTextEditorView.self)
-                return UIImage(named: iconName, in: bundle, compatibleWith: nil)!
-            }
-        }
-
-        case button(type: ButtonType)
+        case button(type: Style)
         case separator
 
         public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -101,8 +83,8 @@ public class MPRichTextEditorView: UIView {
         var toolbarViews = [UIView]()
         for item in toolbarItems {
             switch item {
-            case .button(let type):
-                toolbarViews.append(constructButton(type: type))
+            case .button(let style):
+                toolbarViews.append(constructButton(style: style))
             case .separator:
                 toolbarViews.append(constructSeparator())
             }
@@ -118,7 +100,9 @@ public class MPRichTextEditorView: UIView {
         guard toolbarItems.indices.contains(index) else { return }
 
         let itemTapped = toolbarItems[index]
-        print("Tap on item: \(itemTapped)")
+        guard case .button(let style) = itemTapped else { return }
+
+        textView.markSelection(withSyle: style)
     }
 
     // MARK: - Helpers
@@ -135,9 +119,9 @@ public class MPRichTextEditorView: UIView {
         }
     }
 
-    private func constructButton(type: ToolbarItem.ButtonType) -> UIButton {
+    private func constructButton(style: Style) -> UIButton {
         let button = UIButton(frame: .zero)
-        button.setImage(type.icon, for: .normal)
+        button.setImage(style.icon, for: .normal)
         button.addTarget(self, action: #selector(handleToolbarItemTap(_:)), for: .touchUpInside)
         button.snp.makeConstraints { (make) in
             make.width.height.equalTo(Constants.Layout.buttonHeight)
