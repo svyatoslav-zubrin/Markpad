@@ -8,7 +8,11 @@
 import UIKit
 import SnapKit
 
-class MPRichTextEditorView: UIView {
+public class MPRichTextEditorView: UIView {
+
+    // MARK: - Private props
+
+    private var toolbarItems = [ToolbarItem]()
 
     // MARK: - View structure
 
@@ -26,26 +30,6 @@ class MPRichTextEditorView: UIView {
         sv.alignment = .leading
         sv.distribution = .fill
         return sv
-    }()
-
-    private lazy var boldButton: UIButton = {
-        let bundle = Bundle(for: MPRichTextEditorView.self)
-        let image = UIImage(named: "icon_bold", in: bundle, compatibleWith: nil)!
-
-        let button = UIButton(frame: .zero)
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(boldTapped), for: .touchUpInside)
-        return button
-    }()
-
-    private lazy var italicButton: UIButton = {
-        let bundle = Bundle(for: MPRichTextEditorView.self)
-        let image = UIImage(named: "icon_italic", in: bundle, compatibleWith: nil)!
-
-        let button = UIButton(frame: .zero)
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(italicTapped), for: .touchUpInside)
-        return button
     }()
 
     private lazy var textViewContainer: UIView = {
@@ -72,28 +56,106 @@ class MPRichTextEditorView: UIView {
         construct()
     }
 
+
+    // MARK: - Public
+
+    public enum ToolbarItem: Equatable {
+
+        public enum ButtonType {
+            case bold, italic, underline, link, bulletList, numberedList
+
+            var icon: UIImage {
+                let iconName: String
+                switch self {
+                case .bold: iconName = "icon_bold"
+                case .italic: iconName = "icon_italic"
+                case .underline: iconName = "icon_underline"
+                case .link: iconName = "icon_link"
+                case .bulletList: iconName = "icon_bullet_list"
+                case .numberedList: iconName = "icon_numbered_list"
+                }
+                let bundle = Bundle(for: MPRichTextEditorView.self)
+                return UIImage(named: iconName, in: bundle, compatibleWith: nil)!
+            }
+        }
+
+        case button(type: ButtonType)
+        case separator
+
+        public static func == (lhs: Self, rhs: Self) -> Bool {
+            switch (lhs, rhs) {
+            case (.button(let lType), .button(let rType)): return lType == rType
+            case (.separator, .separator): return true
+            default: return false
+            }
+        }
+    }
+
+    public func configure(toolbarItems items: [ToolbarItem]) {
+        guard toolbarItems != items else { return }
+
+        toolbarItems.removeAll()
+        toolbarStackView.arrangedSubviews.forEach { toolbarStackView.removeArrangedSubview($0) }
+
+        toolbarItems.append(contentsOf: items)
+        var toolbarViews = [UIView]()
+        for item in toolbarItems {
+            switch item {
+            case .button(let type):
+                toolbarViews.append(constructButton(type: type))
+            case .separator:
+                toolbarViews.append(constructSeparator())
+            }
+        }
+
+        toolbarViews.forEach { toolbarStackView.addArrangedSubview($0) }
+    }
+
+    // MARK: - User actions
+
+    @IBAction func handleToolbarItemTap(_ sender: UIView) {
+        guard let index = toolbarStackView.arrangedSubviews.index(of: sender) else { return }
+        guard toolbarItems.indices.contains(index) else { return }
+
+        let itemTapped = toolbarItems[index]
+        print("Tap on item: \(itemTapped)")
+    }
+
+    // MARK: - Helpers
+
     private struct Constants {
         struct Layout {
             static let borderWidth: CGFloat = 1
             static let cornerRadius: CGFloat = 8
             static let buttonHeight: CGFloat = 24
+            static let separatorWidth: CGFloat = 1
             static let toolbarSpacingX: CGFloat = 4
             static let toolbarMargins: CGFloat = 8
             static let textviewMargins: CGFloat = 8
         }
     }
 
-    private func construct() {
-        // buttons
-        let buttons = [boldButton, italicButton]
-        for button in buttons {
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.snp.makeConstraints { (make) in
-                make.width.height.equalTo(Constants.Layout.buttonHeight)
-            }
-            toolbarStackView.addArrangedSubview(button)
+    private func constructButton(type: ToolbarItem.ButtonType) -> UIButton {
+        let button = UIButton(frame: .zero)
+        button.setImage(type.icon, for: .normal)
+        button.addTarget(self, action: #selector(handleToolbarItemTap(_:)), for: .touchUpInside)
+        button.snp.makeConstraints { (make) in
+            make.width.height.equalTo(Constants.Layout.buttonHeight)
         }
+        return button
+    }
 
+    private func constructSeparator() -> UIView {
+        let v = UIView()
+        v.backgroundColor = .gray
+        v.snp.makeConstraints { (make) in
+            make.height.equalTo(Constants.Layout.buttonHeight)
+            make.width.equalTo(Constants.Layout.separatorWidth)
+        }
+        return v
+    }
+
+    private func construct() {
         // toolbar
         toolbarContainer.addSubview(toolbarStackView)
         toolbarStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -122,21 +184,11 @@ class MPRichTextEditorView: UIView {
         toolbarContainer.snp.makeConstraints { (make) in
             make.top.leading.equalToSuperview()
             make.trailing.lessThanOrEqualToSuperview()
-            make.bottom.equalTo(textViewContainer.snp.top)
+            make.bottom.equalTo(textViewContainer.snp.top).offset(-Constants.Layout.toolbarSpacingX)
         }
 
         textViewContainer.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
         }
-    }
-
-    // MARK: - User actions
-
-    @IBAction func boldTapped() {
-        print("Bold")
-    }
-
-    @IBAction func italicTapped() {
-        print("Italic")
     }
 }

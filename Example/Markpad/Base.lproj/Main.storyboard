@@ -32,6 +32,9 @@
                             <constraint firstItem="g0P-jf-GyM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="zGx-vO-Q1l"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="richTextEditor" destination="g0P-jf-GyM" id="fCg-By-jIa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

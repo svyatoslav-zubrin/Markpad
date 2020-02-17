@@ -11,9 +11,21 @@ import Markpad
 
 class ViewController: UIViewController {
 
+    @IBOutlet private weak var richTextEditor: MPRichTextEditorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        richTextEditor.configure(toolbarItems: [
+            .button(type: .bold),
+            .button(type: .italic),
+            .button(type: .underline),
+            .separator,
+            .button(type: .numberedList),
+            .button(type: .bulletList),
+            .separator,
+            .button(type: .link)
+        ])
     }
 
 }
