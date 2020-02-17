@@ -270,10 +270,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Markpad_Example/Pods-Markpad_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Markpad/Markpad.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Markpad.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

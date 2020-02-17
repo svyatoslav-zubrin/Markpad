@@ -16,7 +16,17 @@
     "tag": "0.1.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "11.0"
   },
-  "source_files": "Markpad/Classes/**/*"
+  "source_files": "Classes/**/*.swift",
+  "resource_bundles": {
+    "Markpad": [
+      "Markpad/Classes/**/*.xib"
+    ]
+  },
+  "dependencies": {
+    "SnapKit": [
+      "~> 5.0"
+    ]
+  }
 }

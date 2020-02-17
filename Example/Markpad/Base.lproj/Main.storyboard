@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0P-jf-GyM" customClass="MPMarkpadView" customModule="Markpad">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0P-jf-GyM" customClass="MPRichTextEditorView" customModule="Markpad">
                                 <rect key="frame" x="16" y="20" width="343" height="395"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -32,9 +32,6 @@
                             <constraint firstItem="g0P-jf-GyM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="zGx-vO-Q1l"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="markpad" destination="g0P-jf-GyM" id="xKT-KN-Dkd"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

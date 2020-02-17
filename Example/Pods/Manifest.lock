@@ -1,15 +1,22 @@
 PODS:
-  - Markpad (0.1.0)
+  - Markpad (0.1.0):
+    - SnapKit (~> 5.0)
+  - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - Markpad (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SnapKit
 
 EXTERNAL SOURCES:
   Markpad:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Markpad: 4d881ab59c17930dd747ce9c795166ba11b296cb
+  Markpad: b67e21b5cc8a657d49d6df033522a2142492aae4
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
 PODFILE CHECKSUM: 98c7cd6d532b0dde8a695c439d89a06bbc4c1eb4
 
