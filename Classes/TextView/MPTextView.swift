@@ -84,6 +84,20 @@ class MPTextView: UITextView {
 extension MPTextView: Stylable {
 
     func markSelection(withSyle style: Style) {
-        print("Will mark selection with style: \(style)")
+        guard selectedRange.length > 0 else { return }
+
+        switch style {
+        case .bold:
+            storage.applyBold(to: selectedRange)
+        case .italic:
+            storage.applyItalic(to: selectedRange)
+        case .underline:
+            storage.applyUnderline(to: selectedRange)
+//        case .link:
+//        case .bulletList:
+//        case .numberedList:
+        default:
+            break
+        }
     }
 }

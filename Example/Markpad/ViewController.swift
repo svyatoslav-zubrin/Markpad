@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        richTextEditor.configure(toolbarItems: [
+        let items: [MPRichTextEditorView.ToolbarItem] = [
             .button(type: .bold),
             .button(type: .italic),
             .button(type: .underline),
@@ -25,8 +25,16 @@ class ViewController: UIViewController {
             .button(type: .bulletList),
             .separator,
             .button(type: .link)
-        ])
-    }
+        ]
 
+        let textColor = UIColor(red: 74/256, green: 74/256, blue: 74/256, alpha: 1)
+        let baseStyle = MPVisualStyle(fontName: "Avenir-Medium",
+                                      fontSize: 20,
+                                      color: textColor,
+                                      traits: [])
+        let config = MPVisualStylesConfiguration(baseStyle: baseStyle)
+
+        richTextEditor.configure(toolbarItems: items, styleConfig: config)
+    }
 }
 

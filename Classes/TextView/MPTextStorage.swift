@@ -91,6 +91,18 @@ class MPTextStorage: NSTextStorage {
         self.endEditing()
     }
 
+    /// Adds the attribute to a string for a particular range.
+    /// - Parameters:
+    ///   - name: The name of the attribute to add
+    ///   - value: The value of the attribute to add
+    ///   - range: The range in which to add attribute
+    override func addAttribute(_ name: NSAttributedStringKey, value: Any, range: NSRange) {
+        self.beginEditing()
+        backingStore.addAttribute(name, value: value, range: range)
+        self.edited(.editedAttributes, range: range, changeInLength: 0)
+        self.endEditing()
+    }
+
     /// Retrieves the attributes of a string for a particular range.
     ///
     /// - parameter at: The location to begin with.
@@ -125,5 +137,94 @@ class MPTextStorage: NSTextStorage {
                 backingStore.addAttributes(style.attributes, range: match.range(at: 0))
             })
         }
+    }
+
+    // MARK: - Custom styles
+
+    func applyBold(to range: NSRange) {
+        applyFontSymbolicTraitToSelection(.traitBold, to: range)
+    }
+
+    func applyItalic(to range: NSRange) {
+        applyFontSymbolicTraitToSelection(.traitItalic, to: range)
+    }
+
+    private func applyFontSymbolicTraitToSelection(_ trait: UIFontDescriptor.SymbolicTraits, to range: NSRange) {
+        guard range.length > 0 else { return }
+
+        self.beginEditing()
+
+        enum Operation {
+            case add, remove
+        }
+        var operation: Operation = .remove
+        backingStore.enumerateAttribute(.font, in: range, options: []) { (value, range, stop) in
+            guard let font = value as? UIFont else { return }
+
+            if !font.fontDescriptor.symbolicTraits.contains(trait) {
+                operation = .add
+                stop.pointee = true
+            }
+        }
+
+        backingStore.enumerateAttribute(.font, in: range, options: []) { (value, range, stop) in
+            guard let font = value as? UIFont else { return }
+
+            let fontDesc = font.fontDescriptor
+            var newTraits = fontDesc.symbolicTraits
+            switch operation {
+            case .add: newTraits.update(with: trait)
+            case .remove: newTraits.subtract(trait)
+            }
+            if let fontDesc = fontDesc.withSymbolicTraits(newTraits) {
+                let italizedFont = UIFont(descriptor: fontDesc, size: font.pointSize)
+                backingStore.addAttribute(.font, value: italizedFont, range: range)
+            }
+        }
+
+        self.edited(.editedAttributes, range: range, changeInLength: 0)
+        self.endEditing()
+    }
+
+    func applyUnderline(to range: NSRange) {
+        guard range.length > 0 else { return }
+
+        self.beginEditing()
+
+        enum Operation {
+            case none, add, remove
+        }
+        var operation: Operation = .none
+        backingStore.enumerateAttribute(.underlineStyle, in: range, options: []) { (value, frange, stop) in
+            guard let value = value else {
+                // no attribute found
+                operation = .add
+                stop.pointee = true
+                return
+            }
+
+            guard let iValue = value as? Int, let uStyle = NSUnderlineStyle(rawValue: iValue) else { return }
+
+            if uStyle == .styleNone {
+                operation = .add
+                stop.pointee = true
+            } else {
+                operation = .remove
+            }
+        }
+
+        backingStore.enumerateAttribute(.font, in: range, options: []) { (value, frange, stop) in
+            switch operation {
+            case .add:
+                backingStore.addAttribute(.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: frange)
+            case .remove:
+                backingStore.removeAttribute(.underlineStyle, range: frange)
+            case .none:
+                break
+            }
+        }
+
+        self.edited(.editedAttributes, range: range, changeInLength: 0)
+        self.endEditing()
     }
 }

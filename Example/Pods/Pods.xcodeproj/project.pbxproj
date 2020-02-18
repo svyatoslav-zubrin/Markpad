@@ -56,6 +56,7 @@
 		8D7A624F23FAA58300DF56A9 /* solarized-dark.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D7A624423FAA58300DF56A9 /* solarized-dark.json */; };
 		8D7A625023FAA58300DF56A9 /* one-dark-custom.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D7A624523FAA58300DF56A9 /* one-dark-custom.json */; };
 		8D7A625123FAA58300DF56A9 /* one-dark.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D7A624623FAA58300DF56A9 /* one-dark.json */; };
+		8D7A625423FAE36700DF56A9 /* MPVisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7A625323FAE36700DF56A9 /* MPVisualStyle.swift */; };
 		957DA29C4A8F8301E00C460F7B0513C0 /* ConstraintView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3317B0BAACCB840C01DCCFF4CF7D845A /* ConstraintView+Extensions.swift */; };
 		9B9477AEB349EDC2086BF8ECFF033F51 /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8DAD534AD6033B2D8A623D8DE40780 /* ConstraintMakerPriortizable.swift */; };
 		9C91374FF0B2494ABFE73FA1F32AD693 /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD5393E4C8B2A9FA751342EA586228 /* ConstraintOffsetTarget.swift */; };
@@ -180,6 +181,7 @@
 		8D7A624423FAA58300DF56A9 /* solarized-dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "solarized-dark.json"; sourceTree = "<group>"; };
 		8D7A624523FAA58300DF56A9 /* one-dark-custom.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "one-dark-custom.json"; sourceTree = "<group>"; };
 		8D7A624623FAA58300DF56A9 /* one-dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "one-dark.json"; sourceTree = "<group>"; };
+		8D7A625323FAE36700DF56A9 /* MPVisualStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVisualStyle.swift; sourceTree = "<group>"; };
 		8E08968ED39736C7FE804E9C28F4E609 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E2F6E5B05C6053C8DEE43F46B095830 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMultiplierTarget.swift; path = Source/ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
 		91EDD2E04D375F47C42628B8F19FF55D /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupportDSL.swift; path = Source/ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				8D7A622D23FAA55B00DF56A9 /* MPRichTextEditorView.swift */,
+				8D7A625323FAE36700DF56A9 /* MPVisualStyle.swift */,
 			);
 			path = RichTextEditor;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				8D7A623423FAA55B00DF56A9 /* MPStyle.swift in Sources */,
 				8D7A623823FAA55B00DF56A9 /* MPUniversalTypes.swift in Sources */,
 				8D7A623523FAA55B00DF56A9 /* MPTextView.swift in Sources */,
+				8D7A625423FAE36700DF56A9 /* MPVisualStyle.swift in Sources */,
 				8D7A623323FAA55B00DF56A9 /* MPTextStorage.swift in Sources */,
 				8D7A623223FAA55B00DF56A9 /* MPTheme.swift in Sources */,
 				8D7A623923FAA55B00DF56A9 /* MPExtenstions.swift in Sources */,

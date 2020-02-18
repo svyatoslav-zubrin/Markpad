@@ -13,6 +13,7 @@ public class MPRichTextEditorView: UIView {
     // MARK: - Private props
 
     private var toolbarItems = [ToolbarItem]()
+    private var styles: MPVisualStylesConfiguration?
 
     // MARK: - View structure
 
@@ -73,7 +74,14 @@ public class MPRichTextEditorView: UIView {
         }
     }
 
-    public func configure(toolbarItems items: [ToolbarItem]) {
+    public func configure(toolbarItems items: [ToolbarItem], styleConfig: MPVisualStylesConfiguration) {
+        // text view
+        styles = styleConfig
+        textView.font = styleConfig.baseStyle.font
+        textView.textColor = styleConfig.baseStyle.color
+        textView.delegate = self
+
+        // toolbar
         guard toolbarItems != items else { return }
 
         toolbarItems.removeAll()
@@ -174,5 +182,52 @@ public class MPRichTextEditorView: UIView {
         textViewContainer.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
         }
+    }
+}
+
+// MARK: - UITextViewDelegate
+
+extension MPRichTextEditorView: UITextViewDelegate {
+
+    public func textViewDidChangeSelection(_ textView: UITextView) {
+        toolbarButton(for: .bold)?.isHighlighted = false
+        toolbarButton(for: .italic)?.isHighlighted = false
+        toolbarButton(for: .underline)?.isHighlighted = false
+//        toolbarButton(for: .bold)?.tintColor = .gray
+//        toolbarButton(for: .italic)?.tintColor = .gray
+
+        if textView.selectedRange.length == 0 {
+            // bold & italic
+            var traits: UIFontDescriptorSymbolicTraits = []
+            if textView.typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
+                let font = textView.typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont {
+                traits = font.fontDescriptor.symbolicTraits
+
+                toolbarButton(for: .bold)?.isHighlighted = traits.contains(.traitBold)
+                toolbarButton(for: .italic)?.isHighlighted = traits.contains(.traitItalic)
+//                toolbarButton(for: .bold)?.tintColor = .systemBlue
+//                toolbarButton(for: .italic)?.tintColor = .systemBlue
+            }
+            // underline
+            if textView.typingAttributes.keys.contains(NSAttributedString.Key.underlineStyle.rawValue),
+                let styleValue = textView.typingAttributes[NSAttributedString.Key.underlineStyle.rawValue] as? Int,
+                let style = NSUnderlineStyle(rawValue: styleValue) {
+                toolbarButton(for: .underline)?.isHighlighted = style != .styleNone
+            }
+
+            print("traits: \(traits)")
+        } else {
+            print("will handle selected logic later")
+        }
+    }
+
+    private func toolbarButton(for style: Style) -> UIButton? {
+        let toolbarButtons = toolbarItems.filter { $0 != .separator }
+
+        guard !toolbarButtons.isEmpty else { return nil }
+        guard let index = toolbarItems.index(of: .button(type: style)) else { return nil }
+        guard toolbarStackView.arrangedSubviews.indices.contains(index) else { return nil }
+
+        return toolbarStackView.arrangedSubviews[index] as? UIButton
     }
 }
