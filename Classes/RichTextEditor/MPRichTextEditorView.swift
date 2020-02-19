@@ -110,7 +110,11 @@ public class MPRichTextEditorView: UIView {
         let itemTapped = toolbarItems[index]
         guard case .button(let style) = itemTapped else { return }
 
-        textView.markSelection(withSyle: style)
+        if style == .bold || style == .italic || style == .underline {
+            textView.markSelection(withSyle: style)
+        } else if style == .link {
+            presentLinkPopup()
+        }
     }
 
     // MARK: - Helpers
@@ -130,6 +134,7 @@ public class MPRichTextEditorView: UIView {
     private func constructButton(style: Style) -> UIButton {
         let button = UIButton(frame: .zero)
         button.setImage(style.icon, for: .normal)
+        //button.tintColor = .gray
         button.addTarget(self, action: #selector(handleToolbarItemTap(_:)), for: .touchUpInside)
         button.snp.makeConstraints { (make) in
             make.width.height.equalTo(Constants.Layout.buttonHeight)
@@ -182,6 +187,38 @@ public class MPRichTextEditorView: UIView {
         textViewContainer.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
         }
+    }
+
+    private func presentLinkPopup() {
+        let alert = MPIndependentAlert(title: "Link", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = "Title..."
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Link url..."
+        }
+        let ok = UIAlertAction(title: "OK", style: .default) { [weak alert] action in
+            guard let alert = alert else {
+                print("no alert in callback")
+                return
+            }
+            guard let title = alert.textFields?.first?.text, !title.isEmpty else {
+                print("No title provided")
+                return
+            }
+            guard let urlString = alert.textFields?.last?.text, !urlString.isEmpty else {
+                print("No url provided")
+                return
+            }
+
+            // todo: validate URL somehow
+
+            print("Will insert link ...")
+        }
+        alert.addAction(ok)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        alert.show()
     }
 }
 
