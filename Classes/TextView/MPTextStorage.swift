@@ -152,8 +152,6 @@ class MPTextStorage: NSTextStorage {
     private func applyFontSymbolicTraitToSelection(_ trait: UIFontDescriptor.SymbolicTraits, to range: NSRange) {
         guard range.length > 0 else { return }
 
-        self.beginEditing()
-
         enum Operation {
             case add, remove
         }
@@ -166,6 +164,8 @@ class MPTextStorage: NSTextStorage {
                 stop.pointee = true
             }
         }
+
+        self.beginEditing()
 
         backingStore.enumerateAttribute(.font, in: range, options: []) { (value, range, stop) in
             guard let font = value as? UIFont else { return }
@@ -189,8 +189,6 @@ class MPTextStorage: NSTextStorage {
     func applyUnderline(to range: NSRange) {
         guard range.length > 0 else { return }
 
-        self.beginEditing()
-
         enum Operation {
             case none, add, remove
         }
@@ -213,6 +211,8 @@ class MPTextStorage: NSTextStorage {
             }
         }
 
+        self.beginEditing()
+
         backingStore.enumerateAttribute(.font, in: range, options: []) { (value, frange, stop) in
             switch operation {
             case .add:
@@ -226,5 +226,33 @@ class MPTextStorage: NSTextStorage {
 
         self.edited(.editedAttributes, range: range, changeInLength: 0)
         self.endEditing()
+    }
+
+    func applyLink(_ style: Style, to range: NSRange, font: UIFont) {
+        guard case let .link(title, url) = style else { return }
+
+        enum Operation {
+            case insert, update
+        }
+        let operation: Operation = range.length == 0 ? .insert : .update
+
+        if operation == .insert {
+            self.beginEditing()
+
+            let linkString = NSMutableAttributedString(string: title)
+            let linkRange = NSRange(location: 0, length: linkString.length)
+            linkString.addAttributes([.link: url, .font: font], range: linkRange)
+            backingStore.insert(linkString, at: range.location)
+
+            let change = linkRange.length
+            let changeRange = NSRange(location: range.location, length: changeInLength)
+            self.edited([.editedCharacters, .editedAttributes], range: changeRange, changeInLength: change)
+            self.endEditing()
+        } else {
+            let linkString = NSMutableAttributedString(string: title)
+            let linkRange = NSRange(location: 0, length: linkString.length)
+            linkString.addAttributes([.link: url, .font: font], range: linkRange)
+            replaceCharacters(in: range, with: linkString)
+        }
     }
 }

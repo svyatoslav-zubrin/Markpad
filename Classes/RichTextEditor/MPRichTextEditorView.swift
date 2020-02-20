@@ -8,6 +8,24 @@
 import UIKit
 import SnapKit
 
+public enum MPToolbarItemType {
+    case bold, italic, underline, bulletList, numberList, link
+
+    internal var icon: UIImage {
+        let iconName: String
+        switch self {
+        case .bold: iconName = "icon_bold"
+        case .italic: iconName = "icon_italic"
+        case .underline: iconName = "icon_underline"
+        case .link: iconName = "icon_link"
+        case .bulletList: iconName = "icon_bullet_list"
+        case .numberList: iconName = "icon_numbered_list"
+        }
+        let bundle = Bundle(for: MPRichTextEditorView.self)
+        return UIImage(named: iconName, in: bundle, compatibleWith: nil)!
+    }
+}
+
 public class MPRichTextEditorView: UIView {
 
     // MARK: - Private props
@@ -57,12 +75,11 @@ public class MPRichTextEditorView: UIView {
         construct()
     }
 
-
     // MARK: - Public
 
     public enum ToolbarItem: Equatable {
 
-        case button(type: Style)
+        case button(type: MPToolbarItemType)
         case separator
 
         public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -91,8 +108,8 @@ public class MPRichTextEditorView: UIView {
         var toolbarViews = [UIView]()
         for item in toolbarItems {
             switch item {
-            case .button(let style):
-                toolbarViews.append(constructButton(style: style))
+            case .button(let type):
+                toolbarViews.append(constructButton(of: type))
             case .separator:
                 toolbarViews.append(constructSeparator())
             }
@@ -108,12 +125,38 @@ public class MPRichTextEditorView: UIView {
         guard toolbarItems.indices.contains(index) else { return }
 
         let itemTapped = toolbarItems[index]
-        guard case .button(let style) = itemTapped else { return }
+        guard case .button(let type) = itemTapped else { return }
 
-        if style == .bold || style == .italic || style == .underline {
-            textView.markSelection(withSyle: style)
-        } else if style == .link {
-            presentLinkPopup()
+        switch type {
+        case .bold:
+            textView.markSelection(withStyle: .bold, updateToolbar: { [weak self] in
+                self?.updateToolbarButtonsState()
+            })
+
+        case .italic:
+            textView.markSelection(withStyle: .italic, updateToolbar: { [weak self] in
+                self?.updateToolbarButtonsState()
+            })
+
+        case .underline:
+            textView.markSelection(withStyle: .underline, updateToolbar: { [weak self] in
+                self?.updateToolbarButtonsState()
+            })
+
+        case .bulletList:
+            () // todo:
+
+        case .numberList:
+            () // todo
+
+        case .link:
+            guard let range = textView.selectedTextRange else { return }
+            if range.isEmpty {
+                presentLinkPopup()
+            } else {
+                let text = textView.text(in: range)
+                presentLinkPopup(title: text)
+            }
         }
     }
 
@@ -131,10 +174,11 @@ public class MPRichTextEditorView: UIView {
         }
     }
 
-    private func constructButton(style: Style) -> UIButton {
+    private func constructButton(of type: MPToolbarItemType) -> UIButton {
         let button = UIButton(frame: .zero)
-        button.setImage(style.icon, for: .normal)
-        //button.tintColor = .gray
+        let image = type.icon
+        button.setImage(image, for: .normal)
+        button.setImage(image.maskWithColor(color: .red), for: .selected)
         button.addTarget(self, action: #selector(handleToolbarItemTap(_:)), for: .touchUpInside)
         button.snp.makeConstraints { (make) in
             make.width.height.equalTo(Constants.Layout.buttonHeight)
@@ -189,31 +233,23 @@ public class MPRichTextEditorView: UIView {
         }
     }
 
-    private func presentLinkPopup() {
+    private func presentLinkPopup(title: String? = nil) {
         let alert = MPIndependentAlert(title: "Link", message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "Title..."
+            textField.text = title
         }
         alert.addTextField { (textField) in
             textField.placeholder = "Link url..."
         }
-        let ok = UIAlertAction(title: "OK", style: .default) { [weak alert] action in
-            guard let alert = alert else {
-                print("no alert in callback")
-                return
-            }
-            guard let title = alert.textFields?.first?.text, !title.isEmpty else {
-                print("No title provided")
-                return
-            }
-            guard let urlString = alert.textFields?.last?.text, !urlString.isEmpty else {
-                print("No url provided")
-                return
-            }
 
-            // todo: validate URL somehow
+        let ok = UIAlertAction(title: "OK", style: .default) { [weak self, weak alert] action in
+            guard let alert = alert else { return }
+            guard let uTitle = alert.textFields?.first?.text, !uTitle.isEmpty else { return }
+            guard let urlString = alert.textFields?.last?.text, !urlString.isEmpty else { return }
+            guard let url = URL(string: urlString) else { return } // todo: validate URL somehow?
 
-            print("Will insert link ...")
+            self?.textView.markSelection(withStyle: .link(title: uTitle, url: url))
         }
         alert.addAction(ok)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -227,11 +263,25 @@ public class MPRichTextEditorView: UIView {
 extension MPRichTextEditorView: UITextViewDelegate {
 
     public func textViewDidChangeSelection(_ textView: UITextView) {
-        toolbarButton(for: .bold)?.isHighlighted = false
-        toolbarButton(for: .italic)?.isHighlighted = false
-        toolbarButton(for: .underline)?.isHighlighted = false
-//        toolbarButton(for: .bold)?.tintColor = .gray
-//        toolbarButton(for: .italic)?.tintColor = .gray
+        updateToolbarButtonsState()
+    }
+
+    // Helpers
+
+    private func toolbarButton(for type: MPToolbarItemType) -> UIButton? {
+        let toolbarButtons = toolbarItems.filter { $0 != .separator }
+
+        guard !toolbarButtons.isEmpty else { return nil }
+        guard let index = toolbarItems.index(of: .button(type: type)) else { return nil }
+        guard toolbarStackView.arrangedSubviews.indices.contains(index) else { return nil }
+
+        return toolbarStackView.arrangedSubviews[index] as? UIButton
+    }
+
+    private func updateToolbarButtonsState() {
+        toolbarButton(for: .bold)?.isSelected = false
+        toolbarButton(for: .italic)?.isSelected = false
+        toolbarButton(for: .underline)?.isSelected = false
 
         if textView.selectedRange.length == 0 {
             // bold & italic
@@ -239,32 +289,24 @@ extension MPRichTextEditorView: UITextViewDelegate {
             if textView.typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
                 let font = textView.typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont {
                 traits = font.fontDescriptor.symbolicTraits
-
-                toolbarButton(for: .bold)?.isHighlighted = traits.contains(.traitBold)
-                toolbarButton(for: .italic)?.isHighlighted = traits.contains(.traitItalic)
-//                toolbarButton(for: .bold)?.tintColor = .systemBlue
-//                toolbarButton(for: .italic)?.tintColor = .systemBlue
+                toolbarButton(for: .bold)?.isSelected = traits.contains(.traitBold)
+                toolbarButton(for: .italic)?.isSelected = traits.contains(.traitItalic)
             }
             // underline
             if textView.typingAttributes.keys.contains(NSAttributedString.Key.underlineStyle.rawValue),
                 let styleValue = textView.typingAttributes[NSAttributedString.Key.underlineStyle.rawValue] as? Int,
                 let style = NSUnderlineStyle(rawValue: styleValue) {
-                toolbarButton(for: .underline)?.isHighlighted = style != .styleNone
+                toolbarButton(for: .underline)?.isSelected = style != .styleNone
             }
-
-            print("traits: \(traits)")
+            // link
+            if textView.typingAttributes.keys.contains(NSAttributedString.Key.link.rawValue),
+                let _ = textView.typingAttributes[NSAttributedString.Key.link.rawValue] as? URL {
+                toolbarButton(for: .link)?.isSelected = true
+            } else {
+                toolbarButton(for: .link)?.isSelected = false
+            }
         } else {
             print("will handle selected logic later")
         }
-    }
-
-    private func toolbarButton(for style: Style) -> UIButton? {
-        let toolbarButtons = toolbarItems.filter { $0 != .separator }
-
-        guard !toolbarButtons.isEmpty else { return nil }
-        guard let index = toolbarItems.index(of: .button(type: style)) else { return nil }
-        guard toolbarStackView.arrangedSubviews.indices.contains(index) else { return nil }
-
-        return toolbarStackView.arrangedSubviews[index] as? UIButton
     }
 }

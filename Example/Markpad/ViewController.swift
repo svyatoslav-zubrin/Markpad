@@ -21,7 +21,7 @@ class ViewController: UIViewController {
             .button(type: .italic),
             .button(type: .underline),
             .separator,
-            .button(type: .numberedList),
+            .button(type: .numberList),
             .button(type: .bulletList),
             .separator,
             .button(type: .link)

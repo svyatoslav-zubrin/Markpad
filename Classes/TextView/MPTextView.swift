@@ -8,30 +8,25 @@
 import UIKit
 
 public enum Style {
-    case bold, italic, underline, link, bulletList, numberedList
-
-    internal var icon: UIImage {
-        let iconName: String
-        switch self {
-        case .bold: iconName = "icon_bold"
-        case .italic: iconName = "icon_italic"
-        case .underline: iconName = "icon_underline"
-        case .link: iconName = "icon_link"
-        case .bulletList: iconName = "icon_bullet_list"
-        case .numberedList: iconName = "icon_numbered_list"
-        }
-        let bundle = Bundle(for: MPRichTextEditorView.self)
-        return UIImage(named: iconName, in: bundle, compatibleWith: nil)!
-    }
+    case bold
+    case italic
+    case underline
+    case link(title: String, url: URL)
+    case bulletList
+    case numberList
 }
 
 protocol Stylable {
-    func markSelection(withSyle style: Style)
+    func markSelection(withStyle style: Style, updateToolbar: (()->())?)
 }
 
 class MPTextView: UITextView {
 
     var storage: MPTextStorage = MPTextStorage()
+
+    private var defaultAttributeValues: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.underlineStyle: NSUnderlineStyle.styleSingle.rawValue
+    ]
 
     /// Creates a new Notepad.
     ///
@@ -83,21 +78,78 @@ class MPTextView: UITextView {
 
 extension MPTextView: Stylable {
 
-    func markSelection(withSyle style: Style) {
-        guard selectedRange.length > 0 else { return }
-
+    func markSelection(withStyle style: Style, updateToolbar: (()->())? = nil) {
         switch style {
         case .bold:
-            storage.applyBold(to: selectedRange)
+            if selectedRange.length > 0 {
+                storage.applyBold(to: selectedRange)
+            } else {
+                switchTypingTrait(.traitBold)
+                updateToolbar?()
+            }
+
         case .italic:
-            storage.applyItalic(to: selectedRange)
+            if selectedRange.length > 0 {
+                storage.applyItalic(to: selectedRange)
+            } else {
+                switchTypingTrait(.traitItalic)
+                updateToolbar?()
+            }
+
         case .underline:
-            storage.applyUnderline(to: selectedRange)
-//        case .link:
+            if selectedRange.length > 0 {
+                storage.applyUnderline(to: selectedRange)
+            } else {
+                switchTypingAttribute(.underlineStyle)
+                updateToolbar?()
+            }
+
+        case .link:
+            let linkFont = font ?? UIFont.systemFont(ofSize: UIFont.systemFontSize)
+            storage.applyLink(style, to: selectedRange, font: linkFont)
+
 //        case .bulletList:
 //        case .numberedList:
+
         default:
             break
+        }
+    }
+}
+
+// MARK: - Helpers
+
+private extension MPTextView {
+
+    func switchTypingTrait(_ trait: UIFontDescriptor.SymbolicTraits) {
+        if typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
+            let font = typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont {
+            if font.fontDescriptor.symbolicTraits.contains(trait) {
+                var traits = font.fontDescriptor.symbolicTraits
+                traits.remove(trait)
+                let descriptor = font.fontDescriptor.withSymbolicTraits(traits)
+                if let descriptor = descriptor {
+                    let newFont = UIFont(descriptor: descriptor, size: font.pointSize)
+                    typingAttributes[NSAttributedString.Key.font.rawValue] = newFont
+                }
+            } else {
+                var traits = font.fontDescriptor.symbolicTraits
+                traits.update(with: trait)
+                let descriptor = font.fontDescriptor.withSymbolicTraits(traits)
+                if let descriptor = descriptor {
+                    let newFont = UIFont(descriptor: descriptor, size: font.pointSize)
+                    typingAttributes[NSAttributedString.Key.font.rawValue] = newFont
+                }
+            }
+        }
+    }
+
+    func switchTypingAttribute(_ attribute: NSAttributedString.Key) {
+        if typingAttributes.keys.contains(attribute.rawValue) {
+            typingAttributes.removeValue(forKey: attribute.rawValue)
+        } else {
+            guard defaultAttributeValues.keys.contains(attribute) else { return }
+            typingAttributes[attribute.rawValue] = defaultAttributeValues[attribute]
         }
     }
 }
