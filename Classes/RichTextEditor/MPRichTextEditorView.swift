@@ -256,6 +256,66 @@ public class MPRichTextEditorView: UIView {
         alert.addAction(cancel)
         alert.show()
     }
+
+    private func updateToolbarButtonsState() {
+        var itemsToSelect: [MPToolbarItemType] = [.bold, .italic, .underline, .link]
+        itemsToSelect.forEach({ toolbarButton(for: $0)?.isSelected = false })
+
+        let selectedRange = textView.selectedRange
+        if selectedRange.length == 0 {
+            // bold & italic
+            if textView.typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
+                let font = textView.typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont {
+                let traits = font.fontDescriptor.symbolicTraits
+                if !traits.contains(.traitBold) { itemsToSelect.removeAll(where: { $0 == .bold }) }
+                if !traits.contains(.traitItalic) { itemsToSelect.removeAll(where: { $0 == .italic }) }
+            }
+            // underline
+            if textView.typingAttributes.keys.contains(NSAttributedString.Key.underlineStyle.rawValue),
+                let styleValue = textView.typingAttributes[NSAttributedString.Key.underlineStyle.rawValue] as? Int,
+                let style = NSUnderlineStyle(rawValue: styleValue) {
+                if style == .styleNone { itemsToSelect.removeAll(where: { $0 == .underline }) }
+            } else {
+                itemsToSelect.removeAll(where: { $0 == .underline })
+            }
+            // link
+            if textView.typingAttributes.keys.contains(NSAttributedString.Key.link.rawValue),
+                let _ = textView.typingAttributes[NSAttributedString.Key.link.rawValue] as? URL {
+                ()
+            } else {
+                itemsToSelect.removeAll(where: { $0 == .link })
+            }
+        } else {
+            textView.storage.enumerateAttributes(in: selectedRange, options: []) { (attrs, range, stop) in
+                // bold & italic
+                if attrs.keys.contains(NSAttributedString.Key.font),
+                    let font = attrs[NSAttributedString.Key.font] as? UIFont {
+                    let traits = font.fontDescriptor.symbolicTraits
+                    if !traits.contains(.traitBold) { itemsToSelect.removeAll(where: { $0 == .bold }) }
+                    if !traits.contains(.traitItalic) { itemsToSelect.removeAll(where: { $0 == .italic }) }
+                }
+                // underline
+                if attrs.keys.contains(NSAttributedString.Key.underlineStyle),
+                    let styleValue = attrs[NSAttributedString.Key.underlineStyle] as? Int,
+                    let style = NSUnderlineStyle(rawValue: styleValue) {
+                    if style == .styleNone { itemsToSelect.removeAll(where: { $0 == .underline }) }
+                } else {
+                    itemsToSelect.removeAll(where: { $0 == .underline })
+                }
+                // link
+                if attrs.keys.contains(NSAttributedString.Key.link) ,
+                    let _ = attrs[NSAttributedString.Key.link] as? URL {
+                    ()
+                } else {
+                    itemsToSelect.removeAll(where: { $0 == .link })
+                }
+
+                if itemsToSelect.isEmpty { stop.pointee = true }
+            }
+        }
+
+        itemsToSelect.forEach({ toolbarButton(for: $0)?.isSelected = true })
+    }
 }
 
 // MARK: - UITextViewDelegate
@@ -276,37 +336,5 @@ extension MPRichTextEditorView: UITextViewDelegate {
         guard toolbarStackView.arrangedSubviews.indices.contains(index) else { return nil }
 
         return toolbarStackView.arrangedSubviews[index] as? UIButton
-    }
-
-    private func updateToolbarButtonsState() {
-        toolbarButton(for: .bold)?.isSelected = false
-        toolbarButton(for: .italic)?.isSelected = false
-        toolbarButton(for: .underline)?.isSelected = false
-
-        if textView.selectedRange.length == 0 {
-            // bold & italic
-            var traits: UIFontDescriptorSymbolicTraits = []
-            if textView.typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
-                let font = textView.typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont {
-                traits = font.fontDescriptor.symbolicTraits
-                toolbarButton(for: .bold)?.isSelected = traits.contains(.traitBold)
-                toolbarButton(for: .italic)?.isSelected = traits.contains(.traitItalic)
-            }
-            // underline
-            if textView.typingAttributes.keys.contains(NSAttributedString.Key.underlineStyle.rawValue),
-                let styleValue = textView.typingAttributes[NSAttributedString.Key.underlineStyle.rawValue] as? Int,
-                let style = NSUnderlineStyle(rawValue: styleValue) {
-                toolbarButton(for: .underline)?.isSelected = style != .styleNone
-            }
-            // link
-            if textView.typingAttributes.keys.contains(NSAttributedString.Key.link.rawValue),
-                let _ = textView.typingAttributes[NSAttributedString.Key.link.rawValue] as? URL {
-                toolbarButton(for: .link)?.isSelected = true
-            } else {
-                toolbarButton(for: .link)?.isSelected = false
-            }
-        } else {
-            print("will handle selected logic later")
-        }
     }
 }

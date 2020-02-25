@@ -85,24 +85,24 @@ extension MPTextView: Stylable {
                 storage.applyBold(to: selectedRange)
             } else {
                 switchTypingTrait(.traitBold)
-                updateToolbar?()
             }
+            updateToolbar?()
 
         case .italic:
             if selectedRange.length > 0 {
                 storage.applyItalic(to: selectedRange)
             } else {
                 switchTypingTrait(.traitItalic)
-                updateToolbar?()
             }
+            updateToolbar?()
 
         case .underline:
             if selectedRange.length > 0 {
                 storage.applyUnderline(to: selectedRange)
             } else {
                 switchTypingAttribute(.underlineStyle)
-                updateToolbar?()
             }
+            updateToolbar?()
 
         case .link:
             let linkFont = font ?? UIFont.systemFont(ofSize: UIFont.systemFontSize)
@@ -121,28 +121,50 @@ extension MPTextView: Stylable {
 
 private extension MPTextView {
 
+    // Traits handling
+
     func switchTypingTrait(_ trait: UIFontDescriptor.SymbolicTraits) {
-        if typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
-            let font = typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont {
-            if font.fontDescriptor.symbolicTraits.contains(trait) {
-                var traits = font.fontDescriptor.symbolicTraits
-                traits.remove(trait)
-                let descriptor = font.fontDescriptor.withSymbolicTraits(traits)
-                if let descriptor = descriptor {
-                    let newFont = UIFont(descriptor: descriptor, size: font.pointSize)
-                    typingAttributes[NSAttributedString.Key.font.rawValue] = newFont
-                }
-            } else {
-                var traits = font.fontDescriptor.symbolicTraits
-                traits.update(with: trait)
-                let descriptor = font.fontDescriptor.withSymbolicTraits(traits)
-                if let descriptor = descriptor {
-                    let newFont = UIFont(descriptor: descriptor, size: font.pointSize)
-                    typingAttributes[NSAttributedString.Key.font.rawValue] = newFont
-                }
+        guard typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
+            let font = typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont else { return }
+
+        if font.fontDescriptor.symbolicTraits.contains(trait) {
+            removeTypingTrait(trait)
+        } else {
+            appendTypingTrait(trait)
+        }
+    }
+
+    func removeTypingTrait(_ trait: UIFontDescriptor.SymbolicTraits) {
+        guard typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
+            let font = typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont else { return }
+
+        if font.fontDescriptor.symbolicTraits.contains(trait) {
+            var traits = font.fontDescriptor.symbolicTraits
+            traits.remove(trait)
+            let descriptor = font.fontDescriptor.withSymbolicTraits(traits)
+            if let descriptor = descriptor {
+                let newFont = UIFont(descriptor: descriptor, size: font.pointSize)
+                typingAttributes[NSAttributedString.Key.font.rawValue] = newFont
             }
         }
     }
+
+    func appendTypingTrait(_ trait: UIFontDescriptor.SymbolicTraits) {
+        guard typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
+            let font = typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont else { return }
+
+        if !font.fontDescriptor.symbolicTraits.contains(trait) {
+            var traits = font.fontDescriptor.symbolicTraits
+            traits.update(with: trait)
+            let descriptor = font.fontDescriptor.withSymbolicTraits(traits)
+            if let descriptor = descriptor {
+                let newFont = UIFont(descriptor: descriptor, size: font.pointSize)
+                typingAttributes[NSAttributedString.Key.font.rawValue] = newFont
+            }
+        }
+    }
+
+    // Attributes handling
 
     func switchTypingAttribute(_ attribute: NSAttributedString.Key) {
         if typingAttributes.keys.contains(attribute.rawValue) {
