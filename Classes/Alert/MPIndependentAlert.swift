@@ -11,7 +11,7 @@ class MPIndependentAlert: UIAlertController {
 
     private lazy var window: UIWindow = {
         let window = UIWindow(frame: UIScreen.main.bounds)
-        window.windowLevel = UIWindowLevelAlert + 1
+        window.windowLevel = UIWindow.Level.alert + 1
         window.backgroundColor = .clear
         window.rootViewController = MPClearViewController()
         return window

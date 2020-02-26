@@ -121,7 +121,7 @@ public class MPRichTextEditorView: UIView {
     // MARK: - User actions
 
     @IBAction func handleToolbarItemTap(_ sender: UIView) {
-        guard let index = toolbarStackView.arrangedSubviews.index(of: sender) else { return }
+        guard let index = toolbarStackView.arrangedSubviews.firstIndex(of: sender) else { return }
         guard toolbarItems.indices.contains(index) else { return }
 
         let itemTapped = toolbarItems[index]
@@ -264,23 +264,21 @@ public class MPRichTextEditorView: UIView {
         let selectedRange = textView.selectedRange
         if selectedRange.length == 0 {
             // bold & italic
-            if textView.typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
-                let font = textView.typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont {
+            if textView.typingAttributes.keys.contains(.font), let font = textView.typingAttributes[.font] as? UIFont {
                 let traits = font.fontDescriptor.symbolicTraits
                 if !traits.contains(.traitBold) { itemsToSelect.removeAll(where: { $0 == .bold }) }
                 if !traits.contains(.traitItalic) { itemsToSelect.removeAll(where: { $0 == .italic }) }
             }
             // underline
-            if textView.typingAttributes.keys.contains(NSAttributedString.Key.underlineStyle.rawValue),
-                let styleValue = textView.typingAttributes[NSAttributedString.Key.underlineStyle.rawValue] as? Int,
-                let style = NSUnderlineStyle(rawValue: styleValue) {
-                if style == .styleNone { itemsToSelect.removeAll(where: { $0 == .underline }) }
+            if textView.typingAttributes.keys.contains(.underlineStyle),
+                let styleValue = textView.typingAttributes[.underlineStyle] as? Int {
+                let style = NSUnderlineStyle(rawValue: styleValue)
+                if style.isEmpty { itemsToSelect.removeAll(where: { $0 == .underline }) }
             } else {
                 itemsToSelect.removeAll(where: { $0 == .underline })
             }
             // link
-            if textView.typingAttributes.keys.contains(NSAttributedString.Key.link.rawValue),
-                let _ = textView.typingAttributes[NSAttributedString.Key.link.rawValue] as? URL {
+            if textView.typingAttributes.keys.contains(.link), let _ = textView.typingAttributes[.link] as? URL {
                 ()
             } else {
                 itemsToSelect.removeAll(where: { $0 == .link })
@@ -296,14 +294,14 @@ public class MPRichTextEditorView: UIView {
                 }
                 // underline
                 if attrs.keys.contains(NSAttributedString.Key.underlineStyle),
-                    let styleValue = attrs[NSAttributedString.Key.underlineStyle] as? Int,
-                    let style = NSUnderlineStyle(rawValue: styleValue) {
-                    if style == .styleNone { itemsToSelect.removeAll(where: { $0 == .underline }) }
+                    let styleValue = attrs[NSAttributedString.Key.underlineStyle] as? Int {
+                    let style = NSUnderlineStyle(rawValue: styleValue)
+                    if style.isEmpty { itemsToSelect.removeAll(where: { $0 == .underline }) }
                 } else {
                     itemsToSelect.removeAll(where: { $0 == .underline })
                 }
                 // link
-                if attrs.keys.contains(NSAttributedString.Key.link) ,
+                if attrs.keys.contains(NSAttributedString.Key.link) ,   
                     let _ = attrs[NSAttributedString.Key.link] as? URL {
                     ()
                 } else {
@@ -332,7 +330,7 @@ extension MPRichTextEditorView: UITextViewDelegate {
         let toolbarButtons = toolbarItems.filter { $0 != .separator }
 
         guard !toolbarButtons.isEmpty else { return nil }
-        guard let index = toolbarItems.index(of: .button(type: type)) else { return nil }
+        guard let index = toolbarItems.firstIndex(of: .button(type: type)) else { return nil }
         guard toolbarStackView.arrangedSubviews.indices.contains(index) else { return nil }
 
         return toolbarStackView.arrangedSubviews[index] as? UIButton

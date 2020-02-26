@@ -25,7 +25,7 @@ class MPTextView: UITextView {
     var storage: MPTextStorage = MPTextStorage()
 
     private var defaultAttributeValues: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.underlineStyle: NSUnderlineStyle.styleSingle.rawValue
+        NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
     ]
 
     /// Creates a new Notepad.
@@ -124,8 +124,7 @@ private extension MPTextView {
     // Traits handling
 
     func switchTypingTrait(_ trait: UIFontDescriptor.SymbolicTraits) {
-        guard typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
-            let font = typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont else { return }
+        guard typingAttributes.keys.contains(.font), let font = typingAttributes[.font] as? UIFont else { return }
 
         if font.fontDescriptor.symbolicTraits.contains(trait) {
             removeTypingTrait(trait)
@@ -135,8 +134,7 @@ private extension MPTextView {
     }
 
     func removeTypingTrait(_ trait: UIFontDescriptor.SymbolicTraits) {
-        guard typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
-            let font = typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont else { return }
+        guard typingAttributes.keys.contains(.font), let font = typingAttributes[.font] as? UIFont else { return }
 
         if font.fontDescriptor.symbolicTraits.contains(trait) {
             var traits = font.fontDescriptor.symbolicTraits
@@ -144,14 +142,13 @@ private extension MPTextView {
             let descriptor = font.fontDescriptor.withSymbolicTraits(traits)
             if let descriptor = descriptor {
                 let newFont = UIFont(descriptor: descriptor, size: font.pointSize)
-                typingAttributes[NSAttributedString.Key.font.rawValue] = newFont
+                typingAttributes[.font] = newFont
             }
         }
     }
 
     func appendTypingTrait(_ trait: UIFontDescriptor.SymbolicTraits) {
-        guard typingAttributes.keys.contains(NSAttributedString.Key.font.rawValue),
-            let font = typingAttributes[NSAttributedString.Key.font.rawValue] as? UIFont else { return }
+        guard typingAttributes.keys.contains(.font), let font = typingAttributes[.font] as? UIFont else { return }
 
         if !font.fontDescriptor.symbolicTraits.contains(trait) {
             var traits = font.fontDescriptor.symbolicTraits
@@ -159,7 +156,7 @@ private extension MPTextView {
             let descriptor = font.fontDescriptor.withSymbolicTraits(traits)
             if let descriptor = descriptor {
                 let newFont = UIFont(descriptor: descriptor, size: font.pointSize)
-                typingAttributes[NSAttributedString.Key.font.rawValue] = newFont
+                typingAttributes[.font] = newFont
             }
         }
     }
@@ -167,11 +164,11 @@ private extension MPTextView {
     // Attributes handling
 
     func switchTypingAttribute(_ attribute: NSAttributedString.Key) {
-        if typingAttributes.keys.contains(attribute.rawValue) {
-            typingAttributes.removeValue(forKey: attribute.rawValue)
+        if typingAttributes.keys.contains(attribute) {
+            typingAttributes.removeValue(forKey: attribute)
         } else {
             guard defaultAttributeValues.keys.contains(attribute) else { return }
-            typingAttributes[attribute.rawValue] = defaultAttributeValues[attribute]
+            typingAttributes[attribute] = defaultAttributeValues[attribute]
         }
     }
 }

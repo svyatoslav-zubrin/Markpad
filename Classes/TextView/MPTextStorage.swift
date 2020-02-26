@@ -96,7 +96,7 @@ class MPTextStorage: NSTextStorage {
     ///   - name: The name of the attribute to add
     ///   - value: The value of the attribute to add
     ///   - range: The range in which to add attribute
-    override func addAttribute(_ name: NSAttributedStringKey, value: Any, range: NSRange) {
+    override func addAttribute(_ name: NSAttributedString.Key, value: Any, range: NSRange) {
         self.beginEditing()
         backingStore.addAttribute(name, value: value, range: range)
         self.edited(.editedAttributes, range: range, changeInLength: 0)
@@ -201,9 +201,10 @@ class MPTextStorage: NSTextStorage {
                 return
             }
 
-            guard let iValue = value as? Int, let uStyle = NSUnderlineStyle(rawValue: iValue) else { return }
+            guard let iValue = value as? Int else { return }
 
-            if uStyle == .styleNone {
+            let uStyle = NSUnderlineStyle(rawValue: iValue)
+            if uStyle.isEmpty {
                 operation = .add
                 stop.pointee = true
             } else {
@@ -216,7 +217,7 @@ class MPTextStorage: NSTextStorage {
         backingStore.enumerateAttribute(.font, in: range, options: []) { (value, frange, stop) in
             switch operation {
             case .add:
-                backingStore.addAttribute(.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: frange)
+                backingStore.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: frange)
             case .remove:
                 backingStore.removeAttribute(.underlineStyle, range: frange)
             case .none:
