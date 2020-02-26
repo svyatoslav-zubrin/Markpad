@@ -29,18 +29,9 @@ public class MPRichTextEditorView: UIView {
 
     // MARK: - Private props
 
-    private var toolbarItems = [ToolbarItem]()
-    private var styles: MPVisualStylesConfiguration?
+    private let config: MPConfiguration
 
     // MARK: - View structure
-
-    private lazy var toolbarContainer: UIView = {
-        let v = UIView()
-        v.layer.borderWidth = Constants.Layout.borderWidth
-        v.layer.cornerRadius = Constants.Layout.cornerRadius
-        v.layer.borderColor = UIColor.gray.cgColor
-        return v
-    }()
 
     private lazy var toolbarStackView: UIStackView = {
         let sv = UIStackView()
@@ -49,35 +40,32 @@ public class MPRichTextEditorView: UIView {
         sv.distribution = .fill
         return sv
     }()
-
-    private lazy var textViewContainer: UIView = {
-        let v = UIView()
-        v.layer.borderWidth = Constants.Layout.borderWidth
-        v.layer.cornerRadius = Constants.Layout.cornerRadius
-        v.layer.borderColor = UIColor.gray.cgColor
-        return v
-    }()
-
+    private let toolbarContainer = UIView()
+    private let textViewContainer = UIView()
     private let textView = MPTextView()
 
     // MARK: - Lifecycle
 
-    override init(frame: CGRect) {
+    private override init(frame: CGRect) {
+        fatalError("Component doesn't support initialization without config atm.")
+    }
+
+    public init(frame: CGRect, config: MPConfiguration) {
+        self.config = config
+
         super.init(frame: frame)
 
-        construct()
+        constructBaseUI()
+        configureBaseUI()
     }
 
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-
-        construct()
+        fatalError("Component doesn't support initialization from Nib atm.")
     }
 
     // MARK: - Public
 
     public enum ToolbarItem: Equatable {
-
         case button(type: MPToolbarItemType)
         case separator
 
@@ -90,31 +78,17 @@ public class MPRichTextEditorView: UIView {
         }
     }
 
-    public func configure(toolbarItems items: [ToolbarItem], styleConfig: MPVisualStylesConfiguration) {
-        // text view
-        styles = styleConfig
-        textView.font = styleConfig.baseStyle.font
-        textView.textColor = styleConfig.baseStyle.color
-        textView.delegate = self
-
-        // toolbar
-        guard toolbarItems != items else { return }
-
-        toolbarItems.removeAll()
-        toolbarStackView.arrangedSubviews.forEach { toolbarStackView.removeArrangedSubview($0) }
-
-        toolbarItems.append(contentsOf: items)
-        var toolbarViews = [UIView]()
-        for item in toolbarItems {
-            switch item {
-            case .button(let type):
-                toolbarViews.append(constructButton(of: type))
-            case .separator:
-                toolbarViews.append(constructSeparator())
-            }
+    private var _toolbarItems = [ToolbarItem]()
+    public var toolbarItems: [ToolbarItem] {
+        get {
+            return _toolbarItems
         }
+        set {
+            guard newValue != toolbarItems else { return }
 
-        toolbarViews.forEach { toolbarStackView.addArrangedSubview($0) }
+            _toolbarItems = newValue
+            fillToolbar()
+        }
     }
 
     // MARK: - User actions
@@ -161,57 +135,26 @@ public class MPRichTextEditorView: UIView {
 
     // MARK: - Helpers
 
-    private struct Constants {
-        struct Layout {
-            static let borderWidth: CGFloat = 1
-            static let cornerRadius: CGFloat = 8
-            static let buttonHeight: CGFloat = 24
-            static let separatorWidth: CGFloat = 1
-            static let toolbarSpacingX: CGFloat = 4
-            static let toolbarMargins: CGFloat = 8
-            static let textviewMargins: CGFloat = 8
-        }
-    }
+    // Base UI
 
-    private func constructButton(of type: MPToolbarItemType) -> UIButton {
-        let button = UIButton(frame: .zero)
-        let image = type.icon
-        button.setImage(image, for: .normal)
-        button.setImage(image.maskWithColor(color: .red), for: .selected)
-        button.addTarget(self, action: #selector(handleToolbarItemTap(_:)), for: .touchUpInside)
-        button.snp.makeConstraints { (make) in
-            make.width.height.equalTo(Constants.Layout.buttonHeight)
-        }
-        return button
-    }
-
-    private func constructSeparator() -> UIView {
-        let v = UIView()
-        v.backgroundColor = .gray
-        v.snp.makeConstraints { (make) in
-            make.height.equalTo(Constants.Layout.buttonHeight)
-            make.width.equalTo(Constants.Layout.separatorWidth)
-        }
-        return v
-    }
-
-    private func construct() {
+    private func constructBaseUI() {
         // toolbar
         toolbarContainer.addSubview(toolbarStackView)
         toolbarStackView.translatesAutoresizingMaskIntoConstraints = false
         toolbarStackView.snp.makeConstraints { (make) in
-            make.top.leading.equalToSuperview().offset(Constants.Layout.toolbarMargins)
-            make.bottom.trailing.equalToSuperview().offset(-Constants.Layout.toolbarMargins)
+            let margin: CGFloat = (config.geometry.toolbarHeight - config.geometry.toolbarItemSize) / 2
+            make.top.leading.equalToSuperview().offset(margin)
+            make.bottom.trailing.equalToSuperview().offset(-margin)
         }
 
-        toolbarStackView.spacing = Constants.Layout.toolbarSpacingX
+        toolbarStackView.spacing = config.geometry.toolbarInteritemSpacing
 
         // text view
         textViewContainer.addSubview(textView)
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.snp.makeConstraints { (make) in
-            make.top.leading.equalToSuperview().offset(Constants.Layout.textviewMargins)
-            make.bottom.trailing.equalToSuperview().offset(-Constants.Layout.textviewMargins)
+            make.top.leading.equalToSuperview().offset(config.geometry.textViewMargins) // todo: move to config
+            make.bottom.trailing.equalToSuperview().offset(-config.geometry.textViewMargins) // todo: move to config
         }
 
         // top
@@ -222,9 +165,10 @@ public class MPRichTextEditorView: UIView {
         textViewContainer.translatesAutoresizingMaskIntoConstraints = false
 
         toolbarContainer.snp.makeConstraints { (make) in
+            make.height.equalTo(config.geometry.toolbarHeight)
             make.top.leading.equalToSuperview()
             make.trailing.lessThanOrEqualToSuperview()
-            make.bottom.equalTo(textViewContainer.snp.top).offset(-Constants.Layout.toolbarSpacingX)
+            make.bottom.equalTo(textViewContainer.snp.top).offset(-config.geometry.toolbarToTextViewMargin)
         }
 
         textViewContainer.snp.makeConstraints { (make) in
@@ -232,28 +176,79 @@ public class MPRichTextEditorView: UIView {
         }
     }
 
-    private func presentLinkPopup(title: String? = nil) {
-        let alert = MPIndependentAlert(title: "Link", message: nil, preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            textField.placeholder = "Title..."
-            textField.text = title
+    private func configureBaseUI() {
+        // containers
+        toolbarContainer.layer.borderWidth = 1
+        toolbarContainer.layer.borderColor = config.interface.borderColor.cgColor
+        toolbarContainer.layer.cornerRadius = config.geometry.textViewCornerRadius
+
+        textViewContainer.layer.borderWidth = 1
+        textViewContainer.layer.borderColor = config.interface.borderColor.cgColor
+        textViewContainer.layer.cornerRadius = config.geometry.textViewCornerRadius
+
+        // text view
+        textView.font = config.content.font
+        textView.textColor = config.content.color
+        textView.delegate = self
+    }
+
+    // Toolbar items
+
+    private struct Constants {
+        struct Layout {
+            static let borderWidth: CGFloat = 1
+            static let separatorWidth: CGFloat = 1
         }
-        alert.addTextField { (textField) in
-            textField.placeholder = "Link url..."
+    }
+
+    private func constructButton(of type: MPToolbarItemType, config: MPConfiguration) -> UIButton {
+        let button = UIButton(frame: .zero)
+        let image = type.icon
+        button.setImage(image.maskWithColor(color: config.interface.toolbarIconsColorNormal), for: .normal)
+        button.setImage(image.maskWithColor(color: config.interface.toolbarIconsColorSelected), for: .selected)
+        button.addTarget(self, action: #selector(handleToolbarItemTap(_:)), for: .touchUpInside)
+        button.snp.makeConstraints { (make) in
+            make.width.height.equalTo(config.geometry.toolbarItemSize)
+        }
+        return button
+    }
+
+    private func constructSeparator(config: MPConfiguration) -> UIView {
+        let v = UIView()
+        v.backgroundColor = config.interface.toolbarIconsColorNormal
+        v.snp.makeConstraints { (make) in
+            make.height.equalTo(config.geometry.toolbarItemSize)
+            make.width.equalTo(Constants.Layout.separatorWidth)
+        }
+        return v
+    }
+
+    private func fillToolbar() {
+        toolbarStackView.arrangedSubviews.forEach { toolbarStackView.removeArrangedSubview($0) }
+
+        guard !_toolbarItems.isEmpty else { return }
+
+        var toolbarViews = [UIView]()
+        for item in _toolbarItems {
+            switch item {
+            case .button(let type):
+                toolbarViews.append(constructButton(of: type, config: config))
+            case .separator:
+                toolbarViews.append(constructSeparator(config: config))
+            }
         }
 
-        let ok = UIAlertAction(title: "OK", style: .default) { [weak self, weak alert] action in
-            guard let alert = alert else { return }
-            guard let uTitle = alert.textFields?.first?.text, !uTitle.isEmpty else { return }
-            guard let urlString = alert.textFields?.last?.text, !urlString.isEmpty else { return }
-            guard let url = URL(string: urlString) else { return } // todo: validate URL somehow?
+        toolbarViews.forEach { toolbarStackView.addArrangedSubview($0) }
+    }
 
-            self?.textView.markSelection(withStyle: .link(title: uTitle, url: url))
-        }
-        alert.addAction(ok)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(cancel)
-        alert.show()
+    private func toolbarButton(for type: MPToolbarItemType) -> UIButton? {
+        let toolbarButtons = toolbarItems.filter { $0 != .separator }
+
+        guard !toolbarButtons.isEmpty else { return nil }
+        guard let index = toolbarItems.firstIndex(of: .button(type: type)) else { return nil }
+        guard toolbarStackView.arrangedSubviews.indices.contains(index) else { return nil }
+
+        return toolbarStackView.arrangedSubviews[index] as? UIButton
     }
 
     private func updateToolbarButtonsState() {
@@ -300,7 +295,7 @@ public class MPRichTextEditorView: UIView {
                     itemsToSelect.removeAll(where: { $0 == .underline })
                 }
                 // link
-                if attrs.keys.contains(NSAttributedString.Key.link) ,   
+                if attrs.keys.contains(NSAttributedString.Key.link) ,
                     let _ = attrs[NSAttributedString.Key.link] as? URL {
                     ()
                 } else {
@@ -313,6 +308,32 @@ public class MPRichTextEditorView: UIView {
 
         itemsToSelect.forEach({ toolbarButton(for: $0)?.isSelected = true })
     }
+
+    // Link popup
+
+    private func presentLinkPopup(title: String? = nil) {
+        let alert = MPIndependentAlert(title: config.linkPopup.title, message: nil, preferredStyle: .alert)
+        alert.addTextField { [weak self] (textField) in
+            textField.placeholder = self?.config.linkPopup.linkNamePlaceholder ?? "Enter name here..."
+            textField.text = title
+        }
+        alert.addTextField { [weak self] (textField) in
+            textField.placeholder = self?.config.linkPopup.linkURLPlaceholder ?? "Enter URL here..."
+        }
+
+        let ok = UIAlertAction(title:  config.linkPopup.okButtonTitle, style: .default) { [weak self, weak alert] action in
+            guard let alert = alert else { return }
+            guard let uTitle = alert.textFields?.first?.text, !uTitle.isEmpty else { return }
+            guard let urlString = alert.textFields?.last?.text, !urlString.isEmpty else { return }
+            guard let url = URL(string: urlString) else { return } // todo: validate URL somehow?
+
+            self?.textView.markSelection(withStyle: .link(title: uTitle, url: url))
+        }
+        alert.addAction(ok)
+        let cancel = UIAlertAction(title: config.linkPopup.cancelButtonTitle, style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        alert.show()
+    }
 }
 
 // MARK: - UITextViewDelegate
@@ -321,17 +342,5 @@ extension MPRichTextEditorView: UITextViewDelegate {
 
     public func textViewDidChangeSelection(_ textView: UITextView) {
         updateToolbarButtonsState()
-    }
-
-    // Helpers
-
-    private func toolbarButton(for type: MPToolbarItemType) -> UIButton? {
-        let toolbarButtons = toolbarItems.filter { $0 != .separator }
-
-        guard !toolbarButtons.isEmpty else { return nil }
-        guard let index = toolbarItems.firstIndex(of: .button(type: type)) else { return nil }
-        guard toolbarStackView.arrangedSubviews.indices.contains(index) else { return nil }
-
-        return toolbarStackView.arrangedSubviews[index] as? UIButton
     }
 }
