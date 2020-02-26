@@ -21,8 +21,7 @@ public enum MPToolbarItemType {
         case .bulletList: iconName = "icon_bullet_list"
         case .numberList: iconName = "icon_numbered_list"
         }
-        let bundle = Bundle(for: MPRichTextEditorView.self)
-        return UIImage(named: iconName, in: bundle, compatibleWith: nil)!
+        return UIImage(named: iconName, in: Bundle.resourceBundle, compatibleWith: nil)!
     }
 }
 

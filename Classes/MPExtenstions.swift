@@ -126,3 +126,12 @@ extension UIImage {
         return resultImage
     }
 }
+
+extension Bundle {
+
+    static var resourceBundle: Bundle {
+        let frameworkBundle = Bundle(for: MPRichTextEditorView.self)
+        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("Markpad.bundle")
+        return Bundle(url: bundleURL!)!
+    }
+}
