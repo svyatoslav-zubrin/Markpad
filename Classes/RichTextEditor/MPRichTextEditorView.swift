@@ -27,6 +27,16 @@ public enum MPToolbarItemType {
 
 public class MPRichTextEditorView: UIView {
 
+    // MARK: - Public props
+
+    var text: String {
+        return textView.text
+    }
+
+    var attributedText: NSAttributedString {
+        return textView.attributedText
+    }
+
     // MARK: - Private props
 
     private let config: MPConfiguration
