@@ -29,11 +29,11 @@ public class MPRichTextEditorView: UIView {
 
     // MARK: - Public props
 
-    var text: String {
+    public var text: String {
         return textView.text
     }
 
-    var attributedText: NSAttributedString {
+    public var attributedText: NSAttributedString {
         return textView.attributedText
     }
 

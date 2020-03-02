@@ -20,14 +20,26 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0P-jf-GyM">
-                                <rect key="frame" x="16" y="20" width="343" height="395"/>
+                                <rect key="frame" x="16" y="20" width="343" height="182"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F24-jy-f1n">
+                                <rect key="frame" x="160" y="210" width="55" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="rqd-2V-w0n"/>
+                                </constraints>
+                                <state key="normal" title="Convert"/>
+                                <connections>
+                                    <action selector="convertToMardown" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QFe-Xd-P1m"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="F24-jy-f1n" firstAttribute="top" secondItem="g0P-jf-GyM" secondAttribute="bottom" constant="8" id="5Mj-Ge-hgD"/>
                             <constraint firstItem="g0P-jf-GyM" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="6uR-2l-ED2"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="g0P-jf-GyM" secondAttribute="bottom" constant="252" id="Wse-Sm-cOl"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="g0P-jf-GyM" secondAttribute="bottom" constant="465" id="Wse-Sm-cOl"/>
+                            <constraint firstItem="F24-jy-f1n" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="XtS-GV-OCB"/>
                             <constraint firstItem="g0P-jf-GyM" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="xJD-G0-IrX"/>
                             <constraint firstItem="g0P-jf-GyM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="zGx-vO-Q1l"/>
                         </constraints>
