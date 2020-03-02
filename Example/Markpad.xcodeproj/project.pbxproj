@@ -14,6 +14,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		8D170BCF240D49A7003FA0E1 /* AS2MConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D170BCE240D49A7003FA0E1 /* AS2MConverter.swift */; };
 		F7AA17D41D3C56EFDD79E46B /* Pods_Markpad_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6876905A3D4703CCC512C7F8 /* Pods_Markpad_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		63D5861A2168CDD408E1A4E8 /* Pods-Markpad_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Markpad_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Markpad_Example/Pods-Markpad_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		6876905A3D4703CCC512C7F8 /* Pods_Markpad_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Markpad_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86ABB34657079566938D9491 /* Pods-Markpad_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Markpad_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Markpad_Tests/Pods-Markpad_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		8D170BCE240D49A7003FA0E1 /* AS2MConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AS2MConverter.swift; path = Converter/AS2MConverter.swift; sourceTree = "<group>"; };
 		93E06DC1DE0263AA20AC5E3B /* Pods-Markpad_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Markpad_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Markpad_Tests/Pods-Markpad_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		AFB2C5FAC9689B402F6E15AA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		BDC9DADBE95133A893810571 /* Pods_Markpad_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Markpad_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +104,7 @@
 		607FACD21AFB9204008FA782 /* Example for Markpad */ = {
 			isa = PBXGroup;
 			children = (
+				8D170BCD240D4780003FA0E1 /* Converter */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -146,6 +149,14 @@
 				E47639A04B52EE2B4EE8EBD0 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		8D170BCD240D4780003FA0E1 /* Converter */ = {
+			isa = PBXGroup;
+			children = (
+				8D170BCE240D49A7003FA0E1 /* AS2MConverter.swift */,
+			);
+			name = Converter;
 			sourceTree = "<group>";
 		};
 		9C80237E542F64F111B75CF3 /* Pods */ = {
@@ -325,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D170BCF240D49A7003FA0E1 /* AS2MConverter.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
